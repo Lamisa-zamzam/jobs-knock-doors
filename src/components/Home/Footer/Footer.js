@@ -1,10 +1,10 @@
 import React from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
 import './Footer.css';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faMapMarkerAlt } from '@fortawesome/free-solid-svg-icons';
-import { faPhone } from '@fortawesome/free-solid-svg-icons';
-import { faEnvelope } from '@fortawesome/free-regular-svg-icons';
+// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+// import { faMapMarkerAlt } from '@fortawesome/free-solid-svg-icons';
+// import { faPhone } from '@fortawesome/free-solid-svg-icons';
+// import { faEnvelope } from '@fortawesome/free-regular-svg-icons';
 
 const Footer = () => {
     return (
@@ -26,8 +26,8 @@ const Footer = () => {
                             </div>
                             <div className="quick-links">
                                 <ul>
-                                    <li><a href="#" target="_blank" rel="noopener noreferrer">Aparments</a></li>
-                                    <li><a href="#" target="_blank" rel="noopener noreferrer">Services</a></li>
+                                    <li><a href="#" target="_blank" rel="noopener noreferrer">Jobs</a></li>
+                                    <li><a href="#" target="_blank" rel="noopener noreferrer">Employees</a></li>
                                     <li><a href="#" target="_blank" rel="noopener noreferrer">Login</a></li>
                                     <li><a href="#" target="_blank" rel="noopener noreferrer">Contact</a></li>
                                 </ul>
@@ -41,15 +41,15 @@ const Footer = () => {
                             </div>
                             <div className="address">
                                 <ul>
-                                    <li><span><FontAwesomeIcon icon={faPhone} /></span> 256, 1st AVE, Manchester 125 , Noth England</li>
+                                    {/* <li><span><FontAwesomeIcon icon={faPhone} /></span> 256, 1st AVE, Manchester 125 , Noth England</li>
                                     <li><span><FontAwesomeIcon icon={faEnvelope} /></span> Telephone : +88 (012) 356 958 45</li>
-                                    <li><span><FontAwesomeIcon icon={faMapMarkerAlt} /></span> info@example.com</li>
+                                    <li><span><FontAwesomeIcon icon={faMapMarkerAlt} /></span> info@example.com</li> */}
                                 </ul>
                             </div>
                         </div>
                     </Col>
                </Row>
-            </Container> 
+            </Container>
         </footer>
     );
 };

@@ -1,0 +1,15 @@
+.welcomeDiv {
+    padding: 18% 2%;
+    color:green;
+}
+
+.heading {
+    font-size: 70px;
+}
+
+.imageDiv {
+    background-image: url("https://img.favpng.com/5/15/2/clip-art-job-career-employment-vector-graphics-png-favpng-RbYG85GNcbhhW6tNKFW11xJa1.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 100%;
+}

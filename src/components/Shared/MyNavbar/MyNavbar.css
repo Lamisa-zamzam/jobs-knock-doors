@@ -1,0 +1,27 @@
+.navLink {
+    margin-right: 10%;
+    color: white !important;
+}
+
+.brandName {
+    padding-left: 3%;
+    padding-right: 5%;
+    width: 50%;
+}
+
+.navLogo {
+    border-radius: 100px;
+    width: 8%;
+}
+
+.siteName {
+    display: inline;
+    margin-left: 2%;
+}
+
+.brandSlogan {
+    font-size: 12px;
+    margin-left: 10%;
+    margin-top: -2%;
+    margin-bottom: -1%;
+}

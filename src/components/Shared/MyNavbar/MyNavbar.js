@@ -1,4 +1,3 @@
-import React from "react";
 import { Nav, Navbar } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import "./MyNavbar.css";
@@ -20,11 +19,7 @@ const MyNavbar = () => {
                     <Nav.Link as={Link} to="/home" className="navLink">
                         Home
                     </Nav.Link>
-                    <Nav.Link
-                        as={Link}
-                        to="/dashboard/bookings"
-                        className="navLink"
-                    >
+                    <Nav.Link as={Link} to="/jobs" className="navLink">
                         Jobs
                     </Nav.Link>
                     <Nav.Link
@@ -37,15 +32,11 @@ const MyNavbar = () => {
                     <Nav.Link as={Link} to="/login" className="navLink">
                         Login
                     </Nav.Link>
-                    <Nav.Link as={Link} to="/dashboard" className="navLink">
-                        Dashboard
+                    <Nav.Link as={Link} to="/register" className="navLink">
+                        Register
                     </Nav.Link>
-                    <Nav.Link
-                        as={Link}
-                        to="/dashboard/giveReview"
-                        className="navLink"
-                    >
-                        Feedback
+                    <Nav.Link as={Link} to="/employees" className="navLink">
+                        Employees
                     </Nav.Link>
                 </Nav>
             </Navbar.Collapse>

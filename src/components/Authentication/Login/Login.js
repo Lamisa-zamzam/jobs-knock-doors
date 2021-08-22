@@ -1,5 +1,5 @@
 // React
-import { useState, useEffect } from "react";
+import { useState } from "react";
 // React Bootstrap
 import { Button, Col, Container, Form, Row } from "react-bootstrap";
 // React Hook form
@@ -7,7 +7,7 @@ import { useForm } from "react-hook-form";
 // Router
 import { Link, useHistory, useLocation } from "react-router-dom";
 // CSS
-import "./Login.css";
+import "../auth.css";
 // Font Awesome
 import { faTimes } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -64,12 +64,14 @@ const Login = () => {
                         <Col md={7}>
                             <h1 className="login-heading">
                                 <span className="underlineText">
-                                    It's High Time
+                                    Welcome Back .
                                 </span>
                                 <br />
-                                <span className="underlineText">You </span>
-                                <span className="underlineText">Got </span>
-                                <span className="underlineText">Started</span>
+                                <span className="underlineText">You are </span>
+                                <span className="underlineText">
+                                    closer than{" "}
+                                </span>
+                                <span className="underlineText">you think</span>
                             </h1>
                         </Col>
                         <Col className="form-column" md={5}>

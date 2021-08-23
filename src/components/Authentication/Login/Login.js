@@ -124,7 +124,7 @@ const Login = () => {
                                 </Button>
                                 <div className="accountDiv">
                                     <p>
-                                        Don't have an account?{" "}
+                                        Don't have an account?
                                         <Link
                                             className="react-link"
                                             to="/register"

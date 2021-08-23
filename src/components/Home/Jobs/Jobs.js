@@ -1,6 +1,32 @@
-import { Card, Col, Container, Row, Button } from "react-bootstrap";
+import { Container, Row, Button } from "react-bootstrap";
+import { gql } from "apollo-boost";
+import { graphql } from "react-apollo";
+import Job from "./Job/Job";
 
-const Jobs = () => {
+const getJobsQuery = gql`
+    {
+        jobs {
+            id
+            title
+            company
+            jobType
+            remote
+            experience
+        }
+    }
+`;
+
+const Jobs = (props) => {
+    const displayJobs = () => {
+        const data = props.data;
+
+        if (data.loading) {
+            return <div>Loading...</div>;
+        } else {
+            return data.jobs.slice(0, 3).map((job) => <Job key={job.id} job={job} />);
+        }
+    };
+
     return (
         <Container>
             <br />
@@ -8,20 +34,7 @@ const Jobs = () => {
             <h1 className="mt-5 text-secondary">Your Jobs</h1>
             <br />
             <Row xs={1} md={2} className="g-4">
-                {Array.from({ length: 4 }).map((_, idx) => (
-                    <Col>
-                        <Card>
-                            <Card.Body>
-                                <Card.Title>Front End Developer</Card.Title>
-                                <Card.Text>
-                                    <p>HireRising</p>
-                                    <p>Full Time | Remote</p>
-                                    <p>1 - 5 years of Experience</p>
-                                </Card.Text>
-                            </Card.Body>
-                        </Card>
-                    </Col>
-                ))}
+                {displayJobs()}
             </Row>
             <br />
             <div className="d-flex justify-content-end mb-5">
@@ -31,4 +44,4 @@ const Jobs = () => {
     );
 };
 
-export default Jobs;
+export default graphql(getJobsQuery)(Jobs);

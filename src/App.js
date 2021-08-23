@@ -1,12 +1,15 @@
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import "./App.css";
+
 import MyNavbar from "./components/Shared/MyNavbar/MyNavbar";
 import Home from "./components/Home/Home";
-
 import Login from "./components/Authentication/Login/Login";
 import Register from "./components/Authentication/Register/Register";
 import Profile from "./components/JobSeeker/Profile/Profile";
 import SearchJobs from "./components/JobSeeker/SearchJobs/SearchJobs";
+import PostAJob from "./components/Employer/PostAJob/PostAJob";
+import SearchEmployees from "./components/Employer/SearchEmployees/SearchEmployees";
+import JobDetail from "./components/JobSeeker/JobDetail/JobDetail";
 
 function App() {
     return (
@@ -25,11 +28,20 @@ function App() {
                 <Route path="/register">
                     <Register />
                 </Route>
-                <Route path="/profile">
+                <Route path="/profile/:id">
                     <Profile />
                 </Route>
                 <Route path="/search-jobs">
                     <SearchJobs />
+                </Route>
+                <Route path="/post-jobs">
+                    <PostAJob />
+                </Route>
+                <Route path="/search-employees">
+                    <SearchEmployees />
+                </Route>
+                <Route path="/job/:id">
+                    <JobDetail />
                 </Route>
             </Switch>
         </Router>

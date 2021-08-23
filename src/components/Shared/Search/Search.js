@@ -2,7 +2,7 @@ import { Col, Form, Row, Button } from "react-bootstrap";
 
 const Search = () => {
     return (
-        <Form className="m-5">
+        <Form className="mx-2 my-5">
             <Row>
                 <Col>
                     <small className="text-secondary">Job Title</small>

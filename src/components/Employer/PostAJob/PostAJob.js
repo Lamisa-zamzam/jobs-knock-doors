@@ -32,6 +32,7 @@ const MakeAdmin = (props) => {
             location,
             company,
             title,
+            salary,
         } = data;
 
         console.log({
@@ -47,6 +48,25 @@ const MakeAdmin = (props) => {
             location,
             company,
             title,
+            salary,
+        });
+
+        props.mutate({
+            variables: {
+                remoteOrNot,
+                seniorityLevel,
+                jobType,
+                facilities,
+                requirements,
+                responsibilities,
+                jobDescription,
+                aboutCompany,
+                experience,
+                location,
+                company,
+                title,
+                salary,
+            },
         });
     };
 

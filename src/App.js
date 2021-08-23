@@ -9,7 +9,7 @@ import Profile from "./components/JobSeeker/Profile/Profile";
 import SearchJobs from "./components/JobSeeker/SearchJobs/SearchJobs";
 import PostAJob from "./components/Employer/PostAJob/PostAJob";
 import SearchEmployees from "./components/Employer/SearchEmployees/SearchEmployees";
-import JobDetail from "./components/JobSeeker/JobDetail/JobDetail";
+import JobDetails from "./components/JobSeeker/JobDetails/JobDetails";
 
 function App() {
     return (
@@ -41,7 +41,7 @@ function App() {
                     <SearchEmployees />
                 </Route>
                 <Route path="/job/:id">
-                    <JobDetail />
+                    <JobDetails />
                 </Route>
             </Switch>
         </Router>

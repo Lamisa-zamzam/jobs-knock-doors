@@ -1,20 +1,8 @@
 import { Container, Row, Button } from "react-bootstrap";
-import { gql } from "apollo-boost";
 import { graphql } from "react-apollo";
 import Job from "./Job/Job";
 
-const getJobsQuery = gql`
-    {
-        jobs {
-            id
-            title
-            company
-            jobType
-            remote
-            experience
-        }
-    }
-`;
+import { getJobsQuery } from "../../../queries/queries";
 
 const Jobs = (props) => {
     const displayJobs = () => {
@@ -23,7 +11,9 @@ const Jobs = (props) => {
         if (data.loading) {
             return <div>Loading...</div>;
         } else {
-            return data.jobs.slice(0, 3).map((job) => <Job key={job.id} job={job} />);
+            return data.jobs
+                .slice(0, 3)
+                .map((job) => <Job key={job.id} job={job} />);
         }
     };
 

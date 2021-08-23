@@ -30,6 +30,14 @@ const JobDetail = () => {
 
     return (
         <Container>
+            <div className="text-center text-success">
+                <h1>
+                    MERN stack Developer - Remote
+                    <br />
+                </h1>
+                <small>Google, Rosario, Argentina</small>
+            </div>
+
             <div className="d-flex justify-content-end m-3">
                 <div className="text-primary">
                     <Link className="react-link">

@@ -1,8 +1,12 @@
+import { graphql } from "react-apollo";
 import { useState } from "react";
 import { Button, Container, Form } from "react-bootstrap";
 import { useForm } from "react-hook-form";
 
-const MakeAdmin = () => {
+import { addJobMutation } from "../../../queries/queries";
+
+const MakeAdmin = (props) => {
+    console.log(props);
     // Initial States
     const [error, setError] = useState(null);
 
@@ -15,30 +19,35 @@ const MakeAdmin = () => {
 
     // Handle Form Submit
     const onSubmit = (data) => {
-        const { adminEmail, adminName, id, male, password, adminPhone } = data;
+        const {
+            remoteOrNot,
+            seniorityLevel,
+            jobType,
+            facilities,
+            requirements,
+            responsibilities,
+            jobDescription,
+            aboutCompany,
+            experience,
+            location,
+            company,
+            title,
+        } = data;
 
-        const admin = {
-            email: adminEmail,
-            adminName,
-            id,
-            gender: male ? "male" : "female",
-            password,
-            phone: adminPhone,
-        };
-
-        // Add admin to DB
-        fetch("/api/admin/add", {
-            method: "POST",
-            headers: { "content-type": "application/json" },
-            body: JSON.stringify(admin),
-        })
-            .then((res) => res.json())
-            .then((result) => {
-                if (result.success === true) {
-                    alert("Your admin has been registered successfully!!");
-                    window.location.reload();
-                }
-            });
+        console.log({
+            remoteOrNot,
+            seniorityLevel,
+            jobType,
+            facilities,
+            requirements,
+            responsibilities,
+            jobDescription,
+            aboutCompany,
+            experience,
+            location,
+            company,
+            title,
+        });
     };
 
     return (
@@ -56,6 +65,9 @@ const MakeAdmin = () => {
                             <Form.Control
                                 type="text"
                                 placeholder="e.g. Full Stack Engineer"
+                                {...register("title", {
+                                    required: true,
+                                })}
                             />
                         </Form.Group>
                         <Form.Group className="mb-3">
@@ -63,6 +75,7 @@ const MakeAdmin = () => {
                             <Form.Control
                                 type="text"
                                 placeholder="e.g. Google"
+                                {...register("company", { required: true })}
                             />
                         </Form.Group>
                         <Form.Group className="mb-3">
@@ -70,6 +83,7 @@ const MakeAdmin = () => {
                             <Form.Control
                                 type="text"
                                 placeholder="e.g. Rosario, Argentina"
+                                {...register("location", { required: true })}
                             />
                         </Form.Group>
                         <Form.Group className="mb-3">
@@ -77,6 +91,7 @@ const MakeAdmin = () => {
                             <Form.Control
                                 type="text"
                                 placeholder="e.g. 1-5 years"
+                                {...register("experience", { required: true })}
                             />
                         </Form.Group>
                         <Form.Group className="mb-3">
@@ -84,48 +99,84 @@ const MakeAdmin = () => {
                             <Form.Control
                                 type="text"
                                 placeholder="e.g. $25 per hour"
+                                {...register("salary")}
                             />
                         </Form.Group>
                         <Form.Group className="mb-3" controlId="">
                             <Form.Label>About the company</Form.Label>
-                            <Form.Control as="textarea" rows={3} />
+                            <Form.Control
+                                as="textarea"
+                                rows={3}
+                                {...register("aboutCompany", {
+                                    required: true,
+                                })}
+                            />
                         </Form.Group>
                         <Form.Group className="mb-3" controlId="">
                             <Form.Label>Job Description</Form.Label>
-                            <Form.Control as="textarea" rows={3} />
+                            <Form.Control
+                                as="textarea"
+                                rows={3}
+                                {...register("jobDescription", {
+                                    required: true,
+                                })}
+                            />
                         </Form.Group>
                         <Form.Group className="mb-3" controlId="">
                             <Form.Label>Responsibilities</Form.Label>
-                            <Form.Control as="textarea" rows={3} />
+                            <Form.Control
+                                as="textarea"
+                                rows={3}
+                                {...register("responsibilities")}
+                            />
                         </Form.Group>
                         <Form.Group className="mb-3" controlId="">
                             <Form.Label>Requirements</Form.Label>
-                            <Form.Control as="textarea" rows={3} />
+                            <Form.Control
+                                as="textarea"
+                                rows={3}
+                                {...register("requirements", {
+                                    required: true,
+                                })}
+                            />
                         </Form.Group>
                         <Form.Group className="mb-3" controlId="">
                             <Form.Label>Facilities</Form.Label>
-                            <Form.Control as="textarea" rows={3} />
+                            <Form.Control
+                                as="textarea"
+                                rows={3}
+                                {...register("facilities")}
+                            />
                         </Form.Group>
-                        <Form.Select aria-label="Job Type">
+                        <Form.Select
+                            aria-label="Job Type"
+                            {...register("jobType", { required: true })}
+                        >
                             <option>Job Type</option>
-                            <option value="1">Full-time</option>
-                            <option value="2">Part-time</option>
-                            <option value="3">Internship</option>
-                            <option value="3">Contract</option>
-                            <option value="3">Volunteer</option>
+                            <option value="Full-time">Full-time</option>
+                            <option value="Part-time">Part-time</option>
+                            <option value="Internship">Internship</option>
+                            <option value="Contract">Contract</option>
+                            <option value="Volunteer">Volunteer</option>
                         </Form.Select>
                         <br />
-                        <Form.Select aria-label="Seniority Level">
+                        <Form.Select
+                            aria-label="Seniority Level"
+                            {...register("seniorityLevel", { required: true })}
+                        >
                             <option>Seniority Level</option>
-                            <option value="1">Senior</option>
-                            <option value="2">Mid-senior</option>
-                            <option value="3">Entry</option>
+                            <option value="Senior">Senior</option>
+                            <option value="Mid-senior">Mid-senior</option>
+                            <option value="Entry">Entry</option>
                         </Form.Select>
                         <br />
-                        <Form.Select aria-label="Remote or Not">
+                        <Form.Select
+                            aria-label="Remote or Not"
+                            {...register("remoteOrNot", { required: true })}
+                        >
                             <option>Remote or not</option>
-                            <option value="1">Remote</option>
-                            <option value="2">In-office</option>
+                            <option value="Remote">Remote</option>
+                            <option value="In-office">In-office</option>
                         </Form.Select>
                         <br />
                         <Button
@@ -143,4 +194,4 @@ const MakeAdmin = () => {
     );
 };
 
-export default MakeAdmin;
+export default graphql(addJobMutation)(MakeAdmin);

@@ -10,6 +10,13 @@ import "./Profile.css";
 const Profile = () => {
     return (
         <Container>
+            <br />
+            <div className="text-center text-success">
+                <h2>
+                    John Doe - MERN stack Developer
+                    <br />
+                </h2>
+            </div>
             <div className="d-flex justify-content-end m-3">
                 <div className="text-primary">
                     <Link className="text-decoration-none">

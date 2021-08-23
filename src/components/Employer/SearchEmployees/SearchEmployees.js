@@ -1,24 +1,14 @@
 import { Container, Row } from "react-bootstrap";
 import Search from "../../Shared/Search/Search";
 
-import { gql } from "apollo-boost";
 import { graphql } from "react-apollo";
+
+import { getEmployeesQuery } from "../../../queries/queries";
 
 import "./SearchEmployees.css";
 import Employee from "./Employee/Employee";
 
-const getEmployeesQuery = gql`
-    {
-        jobSeekers {
-            id
-            name
-            title
-            image
-            location
-            email
-        }
-    }
-`;
+
 
 const SearchEmployees = ({ data }) => {
     const { jobSeekers, loading } = data;

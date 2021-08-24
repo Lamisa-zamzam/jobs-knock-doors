@@ -1,35 +1,34 @@
-import { Col, Container, Row, Card } from "react-bootstrap";
+import { Container, Row } from "react-bootstrap";
 import Search from "../../Shared/Search/Search";
+import { graphql } from "react-apollo";
 
 import "./SearchJobs.css";
 
-const SearchJobs = () => {
+import { getJobsQuery } from "../../../queries/queries";
+import Job from "../../Home/Jobs/Job/Job";
+
+const SearchJobs = (props) => {
+    const displayJobs = () => {
+        const data = props.data;
+
+        if (data.loading) {
+            return <div>Loading...</div>;
+        } else {
+            return data.jobs
+                .slice(0, 3)
+                .map((job) => <Job key={job.id} job={job} />);
+        }
+    };
+
     return (
         <Container>
             <div className="d-flex justify-contents-center text-success mx-2 my-4">
                 <h3>Search For Jobs</h3>
             </div>
             <Search />
-            <Row>
-                {Array.from({ length: 4 }).map((_, idx) => (
-                    <Col>
-                        <Card>
-                            <Card.Body>
-                                <Card.Title>Front End Developer</Card.Title>
-                                <Card.Text>
-                                    <small>HireRising</small>
-                                    <br />
-                                    <small>Full Time | Remote</small>
-                                    <br />
-                                    <small>1 - 5 years of Experience</small>
-                                </Card.Text>
-                            </Card.Body>
-                        </Card>
-                    </Col>
-                ))}
-            </Row>
+            <Row>{displayJobs()}</Row>
         </Container>
     );
 };
 
-export default SearchJobs;
+export default graphql(getJobsQuery)(SearchJobs);

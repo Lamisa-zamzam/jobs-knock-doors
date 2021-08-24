@@ -91,4 +91,51 @@ const addJobMutation = gql`
     }
 `;
 
-export { getEmployeesQuery, getJobsQuery, addJobMutation, getJobDetailsQuery };
+const addEmployerMutation = gql`
+    mutation (
+        $name: String!
+        $email: String!
+        $password: String!
+        $phone: String!
+    ) {
+        addEmployer(
+            name: $name
+            email: $email
+            password: $password
+            phone: $phone
+        ) {
+            id
+            name
+            email
+        }
+    }
+`;
+
+const addJobSeekerMutation = gql`
+    mutation (
+        $name: String!
+        $email: String!
+        $password: String!
+        $phone: String!
+    ) {
+        addJobSeeker(
+            name: $name
+            email: $email
+            password: $password
+            phone: $phone
+        ) {
+            id
+            name
+            email
+        }
+    }
+`;
+
+export {
+    getEmployeesQuery,
+    getJobsQuery,
+    addJobMutation,
+    addEmployerMutation,
+    getJobDetailsQuery,
+    addJobSeekerMutation,
+};

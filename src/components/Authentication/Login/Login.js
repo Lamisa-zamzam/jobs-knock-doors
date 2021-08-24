@@ -69,9 +69,12 @@ const Login = () => {
                                 <br />
                                 <span className="underlineText">You are </span>
                                 <span className="underlineText">
-                                    closer than{" "}
+                                    closer than
                                 </span>
-                                <span className="underlineText">you think</span>
+                                <span className="underlineText">
+                                    {" "}
+                                    you think
+                                </span>
                             </h1>
                         </Col>
                         <Col className="form-column" md={5}>

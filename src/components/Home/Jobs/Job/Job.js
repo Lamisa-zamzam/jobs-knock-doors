@@ -13,7 +13,8 @@ const Job = ({ job }) => {
                         <Card.Text>
                             {company} <br />
                             {jobType} | {remote ? "Remote" : "In-office"} <br />
-                            {experience} <br />
+                            {experience} of experience
+                            <br />
                         </Card.Text>
                     </Card.Body>
                 </Card>

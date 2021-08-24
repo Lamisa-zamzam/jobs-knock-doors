@@ -12,9 +12,16 @@ import "../auth.css";
 import { faTimes } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-const Register = () => {
+import { graphql } from "react-apollo";
+import * as compose from "lodash.flowright";
+import {
+    addEmployerMutation,
+    addJobSeekerMutation,
+} from "../../../queries/queries";
+
+const Register = (props) => {
     // Error state
-    const [password, setPassword] = useState("");
+    const [pass, setPassword] = useState("");
     // Password variables, in case there is a mismatch
     const [confirmPassword, setConfirmPassword] = useState("");
     const [err, setErr] = useState("");
@@ -37,7 +44,7 @@ const Register = () => {
     // Handle form submit
     const onSubmit = async (data) => {
         // If passwords mismatch
-        if (password !== confirmPassword) {
+        if (pass !== confirmPassword) {
             // set password fields empty
             setPassword("");
             setConfirmPassword("");
@@ -49,29 +56,24 @@ const Register = () => {
             return setErr("Passwords do not match");
         }
 
+        const { username, email, password, phone, role } = data;
         // Send data to save into DB
-        fetch("https://stormy-cliffs-33775.herokuapp.com/api/auth/register", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(data),
-        })
-            .then((res) => res.json())
-            .then((data) => {
-                if (data.success === false) {
-                    // Set error
-                    setErr(data.error);
-                    // Empty the error after 5 seconds
-                    setTimeout(() => {
-                        setErr("");
-                    }, 5000);
-                } else {
-                    // Save token in local storage
-                    localStorage.setItem("authToken", data.token);
-                    // Redirect user in the requested route
-                    history.replace(from);
-                }
+
+        if (role === "jobSeeker") {
+        } else if (role === "employer") {
+            console.log(username, email, password, phone, role);
+            props.addEmployerMutation({
+                variables: {
+                    name: username,
+                    email,
+                    password,
+                    phone,
+                },
             });
+        }
     };
+
+    console.log(props);
 
     return (
         <div className="login-page">
@@ -138,12 +140,10 @@ const Register = () => {
                                     <Form.Control
                                         {...register("password", {
                                             required: true,
-                                            // pattern:
-                                            //     /^(?=.*\d)(?=(.*\W){2})(?=.*[a-zA-Z])(?!.*\s).{1,15}$/,
                                         })}
                                         type="password"
                                         placeholder="Your Password"
-                                        value={password}
+                                        value={pass}
                                         onChange={(e) =>
                                             setPassword(e.target.value)
                                         }
@@ -178,12 +178,48 @@ const Register = () => {
                                         </span>
                                     )}
                                 </Form.Group>
+
+                                <Form.Group>
+                                    <Form.Label>
+                                        Phone with country code
+                                    </Form.Label>
+                                    <Form.Control
+                                        {...register("phone", {
+                                            required: true,
+                                        })}
+                                        type="text"
+                                        placeholder="Enter Your Phone Number with Country Code"
+                                    />
+                                    {errors.phone && (
+                                        <span className="error">
+                                            This field is required
+                                        </span>
+                                    )}
+                                </Form.Group>
+                                <br />
+
+                                <Form.Select
+                                    aria-label="Your Role"
+                                    {...register("role", {
+                                        required: true,
+                                    })}
+                                >
+                                    <option>Select Your Role</option>
+                                    <option value="jobSeeker">
+                                        I am a job seeker
+                                    </option>
+                                    <option value="employer">
+                                        I am an employer
+                                    </option>
+                                </Form.Select>
+
+                                <br />
                                 <Button type="submit" className="submit-button">
                                     Register
                                 </Button>
                                 <div className="accountDiv">
                                     <p>
-                                        Already have an account?{" "}
+                                        Already have an account?
                                         <Link
                                             className="react-link"
                                             to="/login"
@@ -201,4 +237,7 @@ const Register = () => {
     );
 };
 
-export default Register;
+export default compose(
+    graphql(addJobSeekerMutation, { name: "addJobSeekerMutation" }),
+    graphql(addEmployerMutation, { name: "addEmployerMutation" })
+)(Register);

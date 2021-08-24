@@ -1,5 +1,5 @@
 import { Col, Container, Row, Button } from "react-bootstrap";
-import { Link, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { graphql } from "react-apollo";
 
 import "./JobDetails.css";
@@ -38,11 +38,9 @@ const JobDetails = ({ data }) => {
                     </div>
                     <div className="d-flex justify-content-end m-3">
                         <div className="text-primary">
-                            <Link className="react-link">
-                                <Button variant="success" className="mx-2">
-                                    Apply For this Job
-                                </Button>
-                            </Link>
+                            <Button variant="success" className="mx-2">
+                                Apply For this Job
+                            </Button>
                         </div>
                     </div>
                     <Row>
@@ -133,11 +131,9 @@ const JobDetails = ({ data }) => {
 
                                     <hr />
                                 </div>
-                                <Link>
-                                    <Button variant="success">
-                                        Apply For this Job
-                                    </Button>
-                                </Link>
+                                <Button variant="success">
+                                    Apply For this Job
+                                </Button>
                             </div>
                         </Col>
                         <Col md={8}>

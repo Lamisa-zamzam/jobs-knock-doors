@@ -19,7 +19,7 @@ const MyNavbar = () => {
                     <Nav.Link as={Link} to="/home" className="navLink">
                         Home
                     </Nav.Link>
-                    <Nav.Link as={Link} to="/jobs" className="navLink">
+                    <Nav.Link as={Link} to="/search-jobs" className="navLink">
                         Jobs
                     </Nav.Link>
                     <Nav.Link
@@ -35,7 +35,7 @@ const MyNavbar = () => {
                     <Nav.Link as={Link} to="/register" className="navLink">
                         Register
                     </Nav.Link>
-                    <Nav.Link as={Link} to="/employees" className="navLink">
+                    <Nav.Link as={Link} to="/search-employees" className="navLink">
                         Employees
                     </Nav.Link>
                 </Nav>

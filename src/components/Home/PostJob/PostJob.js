@@ -1,4 +1,5 @@
 import { Button, Col, Container, Row } from "react-bootstrap";
+import { Link } from "react-router-dom";
 
 import "./PostJob.css";
 
@@ -22,9 +23,11 @@ const PostJob = () => {
                         <span>Add one valuable to your company</span>
                         <br />
                         <br />
-                        <Button className="btn btn-success">
-                            Post A Job Now
-                        </Button>
+                        <Link to="/post-a-job">
+                            <Button className="btn btn-success">
+                                Post A Job Now
+                            </Button>
+                        </Link>
                     </div>
                 </Col>
                 <Col md={5}>

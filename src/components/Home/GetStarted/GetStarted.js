@@ -1,4 +1,5 @@
 import { Button, Col, Container, Row } from "react-bootstrap";
+import { Link } from "react-router-dom";
 
 import job from "../../../images/job-search-recruitment-hiring-employment-vector-21795027.jpg";
 
@@ -23,7 +24,11 @@ const GetStarted = () => {
                         <br />
                         <br />
                         <br />
-                        <Button className="btn btn-success">Get Started</Button>
+                        <Link to="/register">
+                            <Button className="btn btn-success">
+                                Get Started
+                            </Button>
+                        </Link>
                     </div>
                 </Col>
             </Row>

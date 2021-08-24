@@ -34,7 +34,7 @@ function App() {
                 <Route path="/search-jobs">
                     <SearchJobs />
                 </Route>
-                <Route path="/post-jobs">
+                <Route path="/post-a-job">
                     <PostAJob />
                 </Route>
                 <Route path="/search-employees">

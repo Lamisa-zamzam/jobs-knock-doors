@@ -3,6 +3,7 @@ import { graphql } from "react-apollo";
 import Job from "./Job/Job";
 
 import { getJobsQuery } from "../../../queries/queries";
+import { Link } from "react-router-dom";
 
 const Jobs = (props) => {
     const displayJobs = () => {
@@ -28,7 +29,9 @@ const Jobs = (props) => {
             </Row>
             <br />
             <div className="d-flex justify-content-end mb-5">
-                <Button className="btn btn-success">See More {">>"}</Button>
+                <Link to="/search-jobs">
+                    <Button className="btn btn-success">See More {">>"}</Button>
+                </Link>
             </div>
         </Container>
     );

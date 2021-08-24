@@ -166,7 +166,13 @@ const JobDetails = ({ data }) => {
                                 <small className="fw-bold">
                                     Responsibilities
                                 </small>
-                                <p>{job?.responsibilities}</p>
+                                {job?.responsibilities ? (
+                                    <p>{job.responsibilities}</p>
+                                ) : (
+                                    <small className="text-muted">
+                                        Responsibilities not provided
+                                    </small>
+                                )}
                                 <br />
                                 <hr />
                                 <br />
@@ -180,7 +186,13 @@ const JobDetails = ({ data }) => {
                             </div>
                             <div>
                                 <small className="fw-bold">Facilities</small>
-                                <p>{job?.facilities}</p>
+                                {job?.facilities ? (
+                                    <p>{job.facilities}</p>
+                                ) : (
+                                    <small className="text-muted">
+                                        Facilities not provided
+                                    </small>
+                                )}
                                 <br />
                                 <hr />
                                 <br />

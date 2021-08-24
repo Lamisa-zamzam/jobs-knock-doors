@@ -36,16 +36,22 @@ const Footer = () => {
                             <div className="quick-links">
                                 <ul>
                                     <li>
-                                        <Link to="/jobs">Jobs</Link>
+                                        <Link to="/search-jobs">Jobs</Link>
                                     </li>
                                     <li>
-                                        <Link to="/employees">Employees</Link>
+                                        <Link to="/profile">Profile</Link>
                                     </li>
                                     <li>
-                                        <Link to="/login">Login</Link>
+                                        <Link to="/search-employees">Employees</Link>
+                                    </li>
+                                    <li>
+                                        <Link to="/post-a-job">Post A Job</Link>
                                     </li>
                                     <li>
                                         <Link to="/register">Register</Link>
+                                    </li>
+                                    <li>
+                                        <Link to="/login">Login</Link>
                                     </li>
                                 </ul>
                             </div>

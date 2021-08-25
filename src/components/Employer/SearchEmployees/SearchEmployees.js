@@ -1,10 +1,5 @@
 import { Container, Row } from "react-bootstrap";
 import Search from "../../Shared/Search/Search";
-
-import { graphql } from "react-apollo";
-
-import { getEmployeesQuery } from "../../../queries/queries";
-
 import "./SearchEmployees.css";
 import Employee from "./Employee/Employee";
 import { useEffect, useState } from "react";
@@ -13,13 +8,6 @@ const SearchEmployees = () => {
     const [employeeName, setEmployeeName] = useState("");
     const [employeeTitle, setEmployeeTitle] = useState("");
     const [data, setData] = useState([]);
-    // const { jobSeekers, loading } = data;
-    // const showEmployees = () =>
-    //     loading ? (
-    //         <div>Loading...</div>
-    //     ) : (
-    //         jobSeekers.map((jobSeeker) => <Employee jobSeeker={jobSeeker} />)
-    //     );
 
     const role = sessionStorage.getItem("role");
 
@@ -30,15 +18,13 @@ const SearchEmployees = () => {
             body: JSON.stringify({
                 query: `query($employeeName: String!, $employeeTitle: String!)
                 {
-                    employeeSearch (employeeName: $employeeName, employeeTitle:$employeeTitle){
+                    employeeSearch (employeeName: $employeeName, employeeTitle: $employeeTitle){
                         id
-                        title
+                        image
                         name
-                        about
-                        skills
-                        experience{
-                            company
-                        }
+                        title
+                        location
+                        email
                     }
                 }
                 `,
@@ -50,7 +36,7 @@ const SearchEmployees = () => {
         }).then(async (data) => {
             const jobData = await data.json();
             console.log(jobData);
-            setData(jobData.data.jobSearch);
+            setData(jobData.data.employeeSearch);
         });
     }, [employeeName, employeeTitle]);
 
@@ -69,12 +55,21 @@ const SearchEmployees = () => {
                             "e.g. John Doe",
                             "e.g. Full Stack Developer",
                         ]}
-                        employeeName={employeeName}
-                        setEmployeeName={setEmployeeName}
-                        employeeTitle={employeeTitle}
-                        setEmployeeTitle={setEmployeeTitle}
+                        states={[employeeName, employeeTitle]}
+                        changeStateFuncs={[setEmployeeName, setEmployeeTitle]}
                     />
-                    {/* <Row>{showEmployees()}</Row> */}
+                    <Row>
+                        {data && data[0] ? (
+                            data.map((jobSeeker) => (
+                                <Employee
+                                    key={jobSeeker.id}
+                                    jobSeeker={jobSeeker}
+                                />
+                            ))
+                        ) : (
+                            <p className="text-muted">No job seeker found</p>
+                        )}
+                    </Row>
                     <br />
                 </>
             ) : (

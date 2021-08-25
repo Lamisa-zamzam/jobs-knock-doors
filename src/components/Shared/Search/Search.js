@@ -1,13 +1,6 @@
 import { Col, Form, Row, Button } from "react-bootstrap";
 
-const Search = ({
-    labels,
-    placeholders,
-    jobTitle,
-    setJobTitle,
-    location,
-    setLocation,
-}) => {
+const Search = ({ labels, placeholders, states, changeStateFuncs }) => {
     return (
         <Form className="mx-2 my-5">
             <Row>
@@ -17,8 +10,10 @@ const Search = ({
                         <Form.Control
                             type="text"
                             placeholder={placeholders[0]}
-                            value={jobTitle}
-                            onChange={(e) => setJobTitle(e.target.value)}
+                            value={states[0]}
+                            onChange={(e) =>
+                                changeStateFuncs[0](e.target.value)
+                            }
                         />
                     </Form.Group>
                 </Col>
@@ -28,8 +23,10 @@ const Search = ({
                         <Form.Control
                             type="text"
                             placeholder={placeholders[1]}
-                            value={location}
-                            onChange={(e) => setLocation(e.target.value)}
+                            value={states[1]}
+                            onChange={(e) =>
+                                changeStateFuncs[1](e.target.value)
+                            }
                         />
                     </Form.Group>
                 </Col>

@@ -35,7 +35,7 @@ const Register = (props) => {
     // Routing Variables
     let history = useHistory();
     let location = useLocation();
-    let { from } = location.state || { from: { pathname: "/dashboard" } };
+    let { from } = location.state || { from: { pathname: "/home" } };
 
     // If the user is already logged in, doesn't make sense to show him/her the register page again
     if (localStorage.getItem("authToken")) {
@@ -60,8 +60,7 @@ const Register = (props) => {
         // Send data to save into DB
 
         if (role === "jobSeeker") {
-            console.log({ username, email, password, phone, role });
-            props.addJobSeekerMutation({
+            await props.addJobSeekerMutation({
                 variables: {
                     name: username,
                     email,
@@ -69,7 +68,41 @@ const Register = (props) => {
                     phone,
                 },
             });
+
+            fetch("http://localhost:5000/graphql", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                    query: `query($email: String!, $password: String!)
+                    {
+                        employer(
+                            email: $email
+                            password: $password
+                        ) {
+                            name
+                            email
+                        }
+                    }
+                `,
+                    variables: {
+                        email,
+                        password,
+                    },
+                }),
+            }).then(async (data) => {
+                // Console log our return data
+                const employer = await data.json();
+                console.log(employer);
+                const { id, email, name } = employer.data.employer;
+
+                sessionStorage.setItem("id", id);
+                sessionStorage.setItem("email", email);
+                sessionStorage.setItem("name", name);
+                sessionStorage.setItem("role", role);
+            });
+            // history.replace(from);
         } else if (role === "employer") {
+            console.log("hello");
             props.addEmployerMutation({
                 variables: {
                     name: username,
@@ -78,6 +111,42 @@ const Register = (props) => {
                     phone,
                 },
             });
+
+            fetch("http://localhost:5000/graphql", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                    query: `query($email: String!, $password: String!)
+                    {
+                        employer(
+                            email: $email
+                            password: $password
+                        ) {
+                            name
+                            email
+                        }
+                    }
+                `,
+                    variables: {
+                        email,
+                        password,
+                    },
+                }),
+            }).then(async (data) => {
+                // Console log our return data
+                const employer = await data.json();
+                console.log(data);
+                const { id, email, name } = employer.data.employer;
+
+                sessionStorage.setItem("id", id);
+                sessionStorage.setItem("email", email);
+                sessionStorage.setItem("name", name);
+                sessionStorage.setItem("role", role);
+
+                history.replace(from);
+            });
+
+            // history.replace(from);
         }
     };
 

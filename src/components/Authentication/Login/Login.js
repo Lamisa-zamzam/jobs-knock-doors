@@ -19,7 +19,7 @@ const Login = (props) => {
     // Routing vars
     let history = useHistory();
     let location = useLocation();
-    let { from } = location.state || { from: { pathname: "/dashboard" } };
+    let { from } = location.state || { from: { pathname: "/home" } };
 
     // If the user is already logged in, doesn't make sense to show him/her the login page again
     if (localStorage.getItem("authToken")) {
@@ -100,6 +100,8 @@ const Login = (props) => {
                 sessionStorage.setItem("email", email);
                 sessionStorage.setItem("name", name);
                 sessionStorage.setItem("role", role);
+
+                history.replace(from);
             });
         }
     };

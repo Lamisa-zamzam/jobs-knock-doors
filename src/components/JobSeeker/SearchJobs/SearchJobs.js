@@ -47,16 +47,14 @@ const SearchJobs = () => {
             <Search
                 labels={["Job Title", "Location"]}
                 placeholders={["e.g. Full Stack Developer", "e.g. Remote"]}
-                jobTitle={jobTitle}
-                setJobTitle={setJobTitle}
-                location={location}
-                setLocation={setLocation}
+                states={[jobTitle, location]}
+                changeStateFuncs={[setJobTitle, setLocation]}
             />
             <Row>
-                {data ? (
+                {data && data[0] ? (
                     data.map((job) => <Job key={job.id} job={job} />)
                 ) : (
-                    <p></p>
+                    <p className="text-muted">No job found</p>
                 )}
             </Row>
         </Container>

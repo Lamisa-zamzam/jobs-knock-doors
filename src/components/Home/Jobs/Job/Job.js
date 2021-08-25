@@ -1,6 +1,8 @@
 import React from "react";
 import { Card, Col } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import { graphql } from "react-apollo";
+import { getJobsQuery } from "../../../../queries/queries";
 
 const Job = ({ job }) => {
     const { id, title, company, jobType, remote, experience } = job;

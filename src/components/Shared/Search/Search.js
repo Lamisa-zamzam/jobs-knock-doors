@@ -1,25 +1,40 @@
 import { Col, Form, Row, Button } from "react-bootstrap";
 
-const Search = () => {
+const Search = ({
+    labels,
+    placeholders,
+    jobTitle,
+    setJobTitle,
+    location,
+    setLocation,
+}) => {
     return (
         <Form className="mx-2 my-5">
             <Row>
                 <Col>
-                    <small className="text-secondary">Job Title</small>
-                    <br />
-                    <Form.Control
-                        type="text"
-                        placeholder="e.g. Full Stack Developer"
-                    />
+                    <Form.Group>
+                        <Form.Label>{labels[0]}</Form.Label>
+                        <Form.Control
+                            type="text"
+                            placeholder={placeholders[0]}
+                            value={jobTitle}
+                            onChange={(e) => setJobTitle(e.target.value)}
+                        />
+                    </Form.Group>
                 </Col>
                 <Col>
-                    <small className="text-secondary">Location</small>
-                    <br />
-                    <Form.Control type="text" placeholder="e.g. Remote" />
+                    <Form.Group>
+                        <Form.Label>{labels[1]}</Form.Label>
+                        <Form.Control
+                            type="text"
+                            placeholder={placeholders[1]}
+                            value={location}
+                            onChange={(e) => setLocation(e.target.value)}
+                        />
+                    </Form.Group>
                 </Col>
                 <Col>
-                    <br />
-                    <Button variant="success" type="submit">
+                    <Button variant="success" style={{ marginTop: "32px" }}>
                         Search
                     </Button>
                 </Col>

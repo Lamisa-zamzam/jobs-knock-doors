@@ -2,13 +2,13 @@ import { Redirect, Route } from "react-router-dom";
 
 const PrivateRoute = ({ children, ...rest }) => {
     // JWT Token
-    const token = sessionStorage.getItem("authToken");
+    const id = sessionStorage.getItem("id");
 
     return (
         <Route
             {...rest}
             render={({ location }) =>
-                token ? (
+                id ? (
                     children
                 ) : (
                     <Redirect

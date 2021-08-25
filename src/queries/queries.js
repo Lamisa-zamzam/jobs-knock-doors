@@ -131,6 +131,15 @@ const addJobSeekerMutation = gql`
     }
 `;
 
+const getEmployeeQuery = gql`
+    {
+        jobSeeker(email: "johndoe@gmail.com", password: "test") {
+            name
+            title
+        }
+    }
+`;
+
 export {
     getEmployeesQuery,
     getJobsQuery,
@@ -138,4 +147,5 @@ export {
     addEmployerMutation,
     getJobDetailsQuery,
     addJobSeekerMutation,
+    getEmployeeQuery,
 };

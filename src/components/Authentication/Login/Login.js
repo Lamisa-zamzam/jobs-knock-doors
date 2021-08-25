@@ -12,7 +12,7 @@ import "../auth.css";
 import { faTimes } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-const Login = () => {
+const Login = (props) => {
     // Error State
     const [err, setErr] = useState("");
 
@@ -31,31 +31,79 @@ const Login = () => {
         handleSubmit,
         formState: { errors },
     } = useForm();
+
     // Handle submit
     const onSubmit = async (data) => {
+        const { email, password, role } = data;
         // Send request to get JWT token
-        fetch("https://stormy-cliffs-33775.herokuapp.com/api/auth/login", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(data),
-        })
-            .then((res) => res.json())
-            .then((data) => {
-                if (data.success === false) {
-                    // Set error
-                    setErr(data.error);
-                    // Empty the error after 5 seconds
-                    setTimeout(() => {
-                        setErr("");
-                    }, 5000);
-                } else {
-                    // Save token in the local storage
-                    localStorage.setItem("authToken", data.token);
-                    // Redirect user in the requested route
-                    history.replace(from);
-                }
+        if (role === "jobSeeker") {
+            fetch("http://localhost:5000/graphql", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                    query: `query($email: String!, $password: String!)
+                    {
+                        jobSeeker(
+                            email: $email
+                            password: $password
+                        ) {
+                            id
+                            name
+                            email
+                        }
+                    }
+                `,
+                    variables: {
+                        email,
+                        password,
+                    },
+                }),
+            }).then(async (data) => {
+                // Console log our return data
+                const jobSeeker = await data.json();
+                const { id, email, name } = jobSeeker.data.jobSeeker;
+
+                sessionStorage.setItem("id", id);
+                sessionStorage.setItem("email", email);
+                sessionStorage.setItem("name", name);
+                sessionStorage.setItem("role", role);
+
+                history.replace(from);
             });
+        } else if (role === "employer") {
+            fetch("http://localhost:5000/graphql", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                    query: `query($email: String!, $password: String!)
+                    {
+                        employer(
+                            email: $email
+                            password: $password
+                        ) {
+                            name
+                            email
+                        }
+                    }
+                `,
+                    variables: {
+                        email,
+                        password,
+                    },
+                }),
+            }).then(async (data) => {
+                // Console log our return data
+                const employer = await data.json();
+                const { id, email, name } = employer.data.employer;
+
+                sessionStorage.setItem("id", id);
+                sessionStorage.setItem("email", email);
+                sessionStorage.setItem("name", name);
+                sessionStorage.setItem("role", role);
+            });
+        }
     };
+
     return (
         <div className="login-page">
             <Container className="login-container">
@@ -122,6 +170,23 @@ const Login = () => {
                                         </span>
                                     )}
                                 </Form.Group>
+                                <br />
+
+                                <Form.Select
+                                    aria-label="Your Role"
+                                    {...register("role", {
+                                        required: true,
+                                    })}
+                                >
+                                    <option>Select Your Role</option>
+                                    <option value="jobSeeker">
+                                        I am a job seeker
+                                    </option>
+                                    <option value="employer">
+                                        I am an employer
+                                    </option>
+                                </Form.Select>
+                                <br />
                                 <Button type="submit" className="submit-button">
                                     Login
                                 </Button>

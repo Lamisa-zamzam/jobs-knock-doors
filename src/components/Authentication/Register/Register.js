@@ -60,8 +60,16 @@ const Register = (props) => {
         // Send data to save into DB
 
         if (role === "jobSeeker") {
+            console.log({ username, email, password, phone, role });
+            props.addJobSeekerMutation({
+                variables: {
+                    name: username,
+                    email,
+                    password,
+                    phone,
+                },
+            });
         } else if (role === "employer") {
-            console.log(username, email, password, phone, role);
             props.addEmployerMutation({
                 variables: {
                     name: username,

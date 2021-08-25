@@ -10,6 +10,7 @@ import SearchJobs from "./components/JobSeeker/SearchJobs/SearchJobs";
 import PostAJob from "./components/Employer/PostAJob/PostAJob";
 import SearchEmployees from "./components/Employer/SearchEmployees/SearchEmployees";
 import JobDetails from "./components/JobSeeker/JobDetails/JobDetails";
+import PrivateRoute from "./components/Authentication/PrivateRoute/PrivateRoute";
 
 function App() {
     return (
@@ -28,21 +29,21 @@ function App() {
                 <Route path="/register">
                     <Register />
                 </Route>
-                <Route path="/profile/:id">
+                <PrivateRoute path="/profile/:id">
                     <Profile />
-                </Route>
-                <Route path="/search-jobs">
+                </PrivateRoute>
+                <PrivateRoute path="/search-jobs">
                     <SearchJobs />
-                </Route>
-                <Route path="/post-a-job">
+                </PrivateRoute>
+                <PrivateRoute path="/post-a-job">
                     <PostAJob />
-                </Route>
-                <Route path="/search-employees">
+                </PrivateRoute>
+                <PrivateRoute path="/search-employees">
                     <SearchEmployees />
-                </Route>
-                <Route path="/job/:id">
+                </PrivateRoute>
+                <PrivateRoute path="/job/:id">
                     <JobDetails />
-                </Route>
+                </PrivateRoute>
             </Switch>
         </Router>
     );

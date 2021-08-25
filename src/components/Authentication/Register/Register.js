@@ -79,6 +79,7 @@ const Register = (props) => {
                             email: $email
                             password: $password
                         ) {
+                            id
                             name
                             email
                         }
@@ -122,6 +123,7 @@ const Register = (props) => {
                             email: $email
                             password: $password
                         ) {
+                            id
                             name
                             email
                         }

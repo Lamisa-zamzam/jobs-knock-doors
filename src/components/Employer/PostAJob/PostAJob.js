@@ -35,8 +35,11 @@ const MakeAdmin = (props) => {
             salary,
         } = data;
 
+        const ifRemote = remoteOrNot === "Remote" ? "true" : "false";
+
         console.log({
-            remoteOrNot,
+            employerId: sessionStorage.getItem("id"),
+            remote: ifRemote,
             seniorityLevel,
             jobType,
             facilities,
@@ -53,7 +56,8 @@ const MakeAdmin = (props) => {
 
         props.mutate({
             variables: {
-                remoteOrNot,
+                employerId: sessionStorage.getItem("id"),
+                remote: ifRemote,
                 seniorityLevel,
                 jobType,
                 facilities,
@@ -68,6 +72,9 @@ const MakeAdmin = (props) => {
                 salary,
             },
         });
+
+        alert("Job Post Added Successfully!!");
+        window.location.reload();
     };
 
     const role = sessionStorage.getItem("role");
@@ -219,6 +226,7 @@ const MakeAdmin = (props) => {
                                     <option value="In-office">In-office</option>
                                 </Form.Select>
                                 <br />
+                                <p>{error}</p>
                                 <Button
                                     variant="success"
                                     type="submit"

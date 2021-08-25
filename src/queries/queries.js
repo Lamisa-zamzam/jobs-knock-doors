@@ -57,7 +57,7 @@ const addJobMutation = gql`
         $title: String!
         $company: String!
         $location: String!
-        $remoteOrNot: Boolean!
+        $remote: String!
         $seniorityLevel: String!
         $jobType: String!
         $facilities: String
@@ -73,7 +73,7 @@ const addJobMutation = gql`
             title: $title
             company: $company
             location: $location
-            remote: $remoteOrNot
+            remote: $remote
             jobType: $jobType
             experience: $experience
             seniorityLevel: $seniorityLevel

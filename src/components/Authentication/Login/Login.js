@@ -81,6 +81,7 @@ const Login = (props) => {
                             email: $email
                             password: $password
                         ) {
+                            id
                             name
                             email
                         }

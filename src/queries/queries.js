@@ -165,6 +165,23 @@ const getJobSeekerByIdQuery = gql`
     }
 `;
 
+const updateJobSeekerMutation = gql`
+    mutation ($id: String!, $title: String!, $phone: String!, $image: String!, $location: String!, $skills: String!, $summary: String!) {
+        updateJobSeeker(
+            id: $id
+            title: $title
+            phone: $phone
+            image: $image
+            location: $location
+            skills: $skills
+            summary: $summery
+        ) {
+            name
+            location
+        }
+    }
+`;
+
 export {
     getEmployeesQuery,
     getJobsQuery,
@@ -174,4 +191,5 @@ export {
     addJobSeekerMutation,
     getEmployeeQuery,
     getJobSeekerByIdQuery,
+    updateJobSeekerMutation,
 };

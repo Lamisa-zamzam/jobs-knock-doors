@@ -35,12 +35,9 @@ const SearchEmployees = () => {
             }),
         }).then(async (data) => {
             const jobData = await data.json();
-            console.log(jobData);
             setData(jobData.data.employeeSearch);
         });
     }, [employeeName, employeeTitle]);
-
-    console.log(data);
 
     return (
         <Container>

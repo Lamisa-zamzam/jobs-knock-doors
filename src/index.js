@@ -4,10 +4,10 @@ import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { ApolloProvider } from "react-apollo";
-import ApolloClient from "apollo-boost";
-
 // Bootstrap Styles
 import "bootstrap/dist/css/bootstrap.min.css";
+import ApolloClient from "apollo-boost";
+require("dotenv").config({ path: "./.env" });
 
 // apollo client setup
 const client = new ApolloClient({

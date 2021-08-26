@@ -16,7 +16,6 @@ const JobDetails = ({ data }) => {
 
     useEffect(() => {
         if (!data.loading) {
-            console.log("heard");
             setLoading(false);
         }
     }, [data.loading]);

@@ -93,7 +93,6 @@ const Register = (props) => {
             }).then(async (data) => {
                 // Console log our return data
                 const employer = await data.json();
-                console.log(employer);
                 const { id, email, name } = employer.data.employer;
 
                 sessionStorage.setItem("id", id);
@@ -103,7 +102,6 @@ const Register = (props) => {
             });
             // history.replace(from);
         } else if (role === "employer") {
-            console.log("hello");
             props.addEmployerMutation({
                 variables: {
                     name: username,
@@ -137,7 +135,6 @@ const Register = (props) => {
             }).then(async (data) => {
                 // Console log our return data
                 const employer = await data.json();
-                console.log(data);
                 const { id, email, name } = employer.data.employer;
 
                 sessionStorage.setItem("id", id);
@@ -151,8 +148,6 @@ const Register = (props) => {
             // history.replace(from);
         }
     };
-
-    console.log(props);
 
     return (
         <div className="login-page">

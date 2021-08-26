@@ -6,7 +6,6 @@ import { useForm } from "react-hook-form";
 import { addJobMutation } from "../../../queries/queries";
 
 const MakeAdmin = (props) => {
-    console.log(props);
     // Initial States
     const [error, setError] = useState(null);
 
@@ -36,23 +35,6 @@ const MakeAdmin = (props) => {
         } = data;
 
         const ifRemote = remoteOrNot === "Remote" ? "true" : "false";
-
-        console.log({
-            employerId: sessionStorage.getItem("id"),
-            remote: ifRemote,
-            seniorityLevel,
-            jobType,
-            facilities,
-            requirements,
-            responsibilities,
-            jobDescription,
-            aboutCompany,
-            experience,
-            location,
-            company,
-            title,
-            salary,
-        });
 
         props.mutate({
             variables: {
@@ -187,7 +169,7 @@ const MakeAdmin = (props) => {
                                     />
                                 </Form.Group>
                                 <Form.Select
-                                className="mb-4"
+                                    className="mb-4"
                                     aria-label="Job Type"
                                     {...register("jobType", { required: true })}
                                 >
@@ -202,7 +184,7 @@ const MakeAdmin = (props) => {
                                 </Form.Select>
 
                                 <Form.Select
-                                className="mb-4"
+                                    className="mb-4"
                                     aria-label="Seniority Level"
                                     {...register("seniorityLevel", {
                                         required: true,
@@ -216,7 +198,7 @@ const MakeAdmin = (props) => {
                                     <option value="Entry">Entry</option>
                                 </Form.Select>
                                 <Form.Select
-                                className="mb-4"
+                                    className="mb-4"
                                     aria-label="Remote or Not"
                                     {...register("remoteOrNot", {
                                         required: true,

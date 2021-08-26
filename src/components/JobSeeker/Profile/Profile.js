@@ -28,11 +28,9 @@ const Profile = ({ data }) => {
         <Container>
             {!loading ? (
                 <>
-                    <br />
-                    <div className="text-center text-success">
+                    <div className="text-center text-success mt-4">
                         <h2>
                             {jobSeekerById?.name} - {jobSeekerById?.title}
-                            <br />
                         </h2>
                     </div>
                     <div className="d-flex justify-content-end m-3">
@@ -45,84 +43,59 @@ const Profile = ({ data }) => {
                     </div>
                     <Row>
                         <Col md={4}>
-                            <div className="profileInfoDiv mt-5">
+                            <div className="mt-5">
                                 <img
                                     src={ProfilePicture}
                                     alt="profile"
                                     className="profileImage"
                                 />
-                                <br />
-                                <br />
-                                <br />
-                                <div>
+                                <div className="mb-4 mt-2">
                                     <small className="text-secondary">
                                         Your Name
                                     </small>
-                                    <h5>John Doe</h5>
-                                    <br />
+                                    <h5>{jobSeekerById?.name}</h5>
                                 </div>
-                                <div>
+                                <div className="mb-4 mt-2">
                                     <small className="text-secondary">
                                         Title
                                     </small>
-                                    <h5>MERN stack developer</h5>
-                                    <br />
+                                    <h5>{jobSeekerById?.title}</h5>
                                 </div>
-                                <div>
+                                <div className="mb-4 mt-2">
                                     <small className="text-secondary">
                                         Email
                                     </small>
-                                    <h5>johnDoe@gmail.com</h5>
-                                    <br />
+                                    <h5>{jobSeekerById?.email}</h5>
                                 </div>
-                                <div>
+                                <div className="mb-4 mt-2">
                                     <small className="text-secondary">
                                         Phone
                                     </small>
-                                    <h5>+847238452354</h5>
-                                    <br />
+                                    <h5>{jobSeekerById?.phone}</h5>
                                 </div>
-                                <div>
+                                <div className="mb-4 mt-2">
                                     <small className="text-secondary">
                                         Location
                                     </small>
-                                    <h5>Rosario, Argentina</h5>
-                                    <br />
+                                    <h5>{jobSeekerById?.location}</h5>
                                 </div>
                             </div>
                         </Col>
                         <Col md={8}>
-                            <div>
-                                <br />
-                                <br />
+                            <div className="mb-2 mt-4">
                                 <small className="fw-bolder">About</small>
-                                <p>
-                                    Lorem ipsum dolor sit, amet consectetur
-                                    adipisicing elit. Ipsa provident recusandae
-                                    assumenda voluptatum placeat et dolores est
-                                    laborum. Rem quod perspiciatis id alias,
-                                    maxime velit! Sequi quis quasi
-                                    necessitatibus doloremque! Error repudiandae
-                                    nulla ab neque, iure eveniet. Blanditiis
-                                    corrupti ut placeat dicta consequuntur sit
-                                    fuga voluptatum! Necessitatibus nisi esse
-                                    non cum. Aut assumenda ut modi itaque minus,
-                                    saepe inventore maxime!
-                                </p>
-                                <br />
-                                <br />
+                                <p>{jobSeekerById?.summery}</p>
                             </div>
-                            <div>
+                            <div className="mb-2 mt-4">
                                 <small className="fw-bold">Skills</small>
                                 <ul>
-                                    <li>React</li>
-                                    <li>Node</li>
-                                    <li>JavaScript</li>
+                                    {jobSeekerById?.skills?.map((skill) => (
+                                        <li>{skill}</li>
+                                    ))}
                                 </ul>
-                                <br />
-                                <br />
+
                             </div>
-                            <div>
+                            <div className="mb-4 mt-4">
                                 <small className="fw-bold">Experience</small>
                                 <hr />
                                 <div className="experience">
@@ -149,7 +122,6 @@ const Profile = ({ data }) => {
                                         consectetur?
                                     </p>
                                     <hr />
-                                    <br />
                                 </div>
                                 <div className="experience">
                                     <h5>MERN stack developer</h5>
@@ -157,7 +129,6 @@ const Profile = ({ data }) => {
                                         Google, San Francisco, USA (14 August,
                                         2020 - Present)
                                     </small>
-                                    <br />
                                     <small>Full Time</small>
                                     <p>
                                         Lorem ipsum dolor sit amet consectetur
@@ -175,7 +146,6 @@ const Profile = ({ data }) => {
                                         consectetur?
                                     </p>
                                     <hr />
-                                    <br />
                                 </div>
                             </div>
                         </Col>

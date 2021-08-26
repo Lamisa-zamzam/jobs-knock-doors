@@ -129,16 +129,15 @@ const Login = (props) => {
                             </h1>
                         </Col>
                         <Col className="form-column" md={5}>
-                            <h4 className="underlineHeading">Sign In</h4>
-                            <FontAwesomeIcon icon={faTimes} size="1x" />
-                            <br />
-                            <br />
+                            <h4 className="underlineHeading mb-2 mt-4">
+                                Sign In
+                            </h4>
                             {err && <span className="error">{err}</span>}
                             <Form
                                 onSubmit={handleSubmit(onSubmit)}
                                 className="login-form"
                             >
-                                <Form.Group>
+                                <Form.Group className="mb-4">
                                     <Form.Label>Email</Form.Label>
                                     <Form.Control
                                         type="email"
@@ -156,7 +155,10 @@ const Login = (props) => {
                                     )}
                                 </Form.Group>
 
-                                <Form.Group controlId="formBasicPassword">
+                                <Form.Group
+                                    className="mb-4"
+                                    controlId="formBasicPassword"
+                                >
                                     <Form.Label>Password</Form.Label>
                                     <Form.Control
                                         type="password"
@@ -173,9 +175,9 @@ const Login = (props) => {
                                         </span>
                                     )}
                                 </Form.Group>
-                                <br />
 
                                 <Form.Select
+                                    className="mb-4"
                                     aria-label="Your Role"
                                     {...register("role", {
                                         required: true,
@@ -189,7 +191,6 @@ const Login = (props) => {
                                         I am an employer
                                     </option>
                                 </Form.Select>
-                                <br />
                                 <Button type="submit" className="submit-button">
                                     Login
                                 </Button>
@@ -197,7 +198,7 @@ const Login = (props) => {
                                     <p>
                                         Don't have an account?
                                         <Link
-                                            className="react-link"
+                                            className="react-link sign-up-link"
                                             to="/register"
                                         >
                                             Sign Up

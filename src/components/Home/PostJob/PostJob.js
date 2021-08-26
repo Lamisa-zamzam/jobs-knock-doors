@@ -10,14 +10,12 @@ const PostJob = () => {
                 <Col md={7}>
                     <div>
                         <h1>Employer?? Post A Job</h1>
-                        <br />
                         <span>Let an unemployed cross the "UN"</span>
                         <br />
                         <span>Add one valuable to your company</span>
                         <br />
-                        <br />
                         <Link to="/post-a-job">
-                            <Button className="btn btn-success btn-post-job-home">
+                            <Button className="btn btn-success btn-post-job-home mt-5">
                                 Post A Job Now
                             </Button>
                         </Link>

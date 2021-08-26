@@ -70,7 +70,6 @@ const SearchEmployees = () => {
                             <p className="text-muted">No job seeker found</p>
                         )}
                     </Row>
-                    <br />
                 </>
             ) : (
                 <p className="text-muted m-5 fs-3">

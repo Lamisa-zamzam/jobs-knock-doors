@@ -7,6 +7,7 @@ import { getJobDetailsQuery } from "../../../queries/queries";
 import { useEffect, useState } from "react";
 
 const JobDetails = ({ data }) => {
+    const windowWidth = window.innerWidth;
     const [loading, setLoading] = useState(data.loading);
     const { id } = useParams();
     const { job } = data;
@@ -20,32 +21,34 @@ const JobDetails = ({ data }) => {
         }
     }, [data.loading]);
 
-    console.log(data);
-
     return (
         <Container>
             {!loading ? (
                 <>
-                    <br />
                     <div className="text-center text-success">
                         <h1>
                             {job?.title} - {job?.remoteOrNot}
-                            <br />
                         </h1>
                         <small>
                             {job?.company}, {job?.location}
                         </small>
                     </div>
-                    <div className="d-flex justify-content-end m-3">
+                    <div
+                        className={
+                            windowWidth > 760
+                                ? "d-flex justify-content-end m-3"
+                                : "d-flex justify-content-center m-3"
+                        }
+                    >
                         <div className="text-primary">
-                            <Button variant="success" className="mx-2">
+                            <Button variant="success" className="btn-apply">
                                 Apply For this Job
                             </Button>
                         </div>
                     </div>
                     <Row>
                         <Col md={4}>
-                            <div className="profileInfoDiv p-5">
+                            <div className="key-info-div">
                                 <div>
                                     <small className="text-secondary">
                                         Title
@@ -103,11 +106,10 @@ const JobDetails = ({ data }) => {
                                     <small className="text-secondary">
                                         Salary
                                     </small>
-                                    <br />
                                     {job?.salary ? (
                                         <h6>{job.salary}</h6>
                                     ) : (
-                                        <small className="text-muted">
+                                        <small className="text-muted d-block">
                                             salary not provided
                                         </small>
                                     )}
@@ -117,82 +119,73 @@ const JobDetails = ({ data }) => {
                                     <small className="text-secondary">
                                         Employer
                                     </small>
-                                    <br />
                                     {job?.employer ? (
                                         <h6>
-                                            {job.employer.name} |
+                                            {job.employer.name} |{" "}
                                             {job.employer.email}
                                         </h6>
                                     ) : (
-                                        <small className="text-muted">
+                                        <small className="text-muted d-block">
                                             No employer record found
                                         </small>
                                     )}
 
                                     <hr />
                                 </div>
-                                <Button variant="success">
+                                <Button variant="success" className="mt-2">
                                     Apply For this Job
                                 </Button>
                             </div>
                         </Col>
                         <Col md={8}>
-                            <div>
-                                <br />
-                                <br />
-                                <small className="fw-bolder">
+                            <div className="detailInfo">
+                                <small className={"fw-bolder"}>
                                     About the company
                                 </small>
                                 <p>{job?.aboutCompany}</p>
-                                <br />
                                 <hr />
-                                <br />
                             </div>
-                            <div>
-                                <br />
+                            <div className="detailInfo">
                                 <small className="fw-bolder">
                                     Job Description
                                 </small>
                                 <p>{job?.jobDescription}</p>
-                                <br />
                                 <hr />
-                                <br />
                             </div>
-                            <div>
+                            <div className="detailInfo">
                                 <small className="fw-bold">
                                     Responsibilities
                                 </small>
                                 {job?.responsibilities ? (
                                     <p>{job.responsibilities}</p>
                                 ) : (
-                                    <small className="text-muted">
+                                    <small className="text-muted d-block">
                                         Responsibilities not provided
                                     </small>
                                 )}
-                                <br />
                                 <hr />
-                                <br />
                             </div>
-                            <div>
+                            <div className="detailInfo">
                                 <small className="fw-bold">Requirements</small>
                                 <p>{job?.requirements}</p>
-                                <br />
                                 <hr />
-                                <br />
                             </div>
-                            <div>
+                            <div className="detailInfo">
                                 <small className="fw-bold">Facilities</small>
                                 {job?.facilities ? (
                                     <p>{job.facilities}</p>
                                 ) : (
-                                    <small className="text-muted">
+                                    <small className="text-muted d-block">
                                         Facilities not provided
                                     </small>
                                 )}
-                                <br />
                                 <hr />
-                                <br />
                             </div>
+                            {windowWidth < 760 && (
+                                <Button variant="success" className="mb-5">
+                                    Apply For this Job
+                                </Button>
+                            )}
                         </Col>
                     </Row>
                 </>

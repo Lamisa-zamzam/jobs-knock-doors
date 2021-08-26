@@ -15,7 +15,6 @@ const GetStarted = () => {
                 <Col md={7}>
                     <div className="get-started-div">
                         <h1>It's rush time</h1>
-                        <br />
                         <span>Get Started Now.</span>
                         <br />
                         <span>Let your jobs and employees find you.</span>

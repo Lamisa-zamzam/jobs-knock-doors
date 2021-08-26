@@ -16,7 +16,6 @@ const Search = ({ labels, placeholders, states, changeStateFuncs }) => {
                             }
                         />
                     </Form.Group>
-                    <br />
                 </Col>
                 <Col md={4}>
                     <Form.Group>

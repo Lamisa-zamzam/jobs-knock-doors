@@ -83,7 +83,6 @@ const MakeAdmin = (props) => {
         <Container fluid>
             {role === "employer" ? (
                 <>
-                    <br />
                     <div
                         className="mt-5 m-auto px-3 py-4"
                         style={{ maxWidth: "900px" }}
@@ -188,6 +187,7 @@ const MakeAdmin = (props) => {
                                     />
                                 </Form.Group>
                                 <Form.Select
+                                className="mb-4"
                                     aria-label="Job Type"
                                     {...register("jobType", { required: true })}
                                 >
@@ -200,8 +200,9 @@ const MakeAdmin = (props) => {
                                     <option value="Contract">Contract</option>
                                     <option value="Volunteer">Volunteer</option>
                                 </Form.Select>
-                                <br />
+
                                 <Form.Select
+                                className="mb-4"
                                     aria-label="Seniority Level"
                                     {...register("seniorityLevel", {
                                         required: true,
@@ -214,8 +215,8 @@ const MakeAdmin = (props) => {
                                     </option>
                                     <option value="Entry">Entry</option>
                                 </Form.Select>
-                                <br />
                                 <Form.Select
+                                className="mb-4"
                                     aria-label="Remote or Not"
                                     {...register("remoteOrNot", {
                                         required: true,
@@ -225,7 +226,6 @@ const MakeAdmin = (props) => {
                                     <option value="Remote">Remote</option>
                                     <option value="In-office">In-office</option>
                                 </Form.Select>
-                                <br />
                                 <p>{error}</p>
                                 <Button
                                     variant="success"
@@ -237,7 +237,6 @@ const MakeAdmin = (props) => {
                             </Form>
                         </div>
                     </div>
-                    <br />
                 </>
             ) : (
                 <p className="text-muted m-5 fs-3">

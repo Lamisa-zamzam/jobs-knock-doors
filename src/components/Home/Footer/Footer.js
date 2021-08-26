@@ -26,7 +26,6 @@ const Footer = () => {
                                 error quis! Sint.
                             </p>
                         </div>
-                        <br />
                     </Col>
                     <Col xs={12} md={3}>
                         <div className="quick-link">
@@ -56,7 +55,6 @@ const Footer = () => {
                                 </ul>
                             </div>
                         </div>
-                        <br />
                     </Col>
                     <Col xs={12} md={4}>
                         <div className="footer-contact">

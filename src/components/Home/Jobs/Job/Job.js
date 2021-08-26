@@ -14,7 +14,6 @@ const Job = ({ job }) => {
                             {company} <br />
                             {jobType} | {remote ? "Remote" : "In-office"} <br />
                             {experience} of experience
-                            <br />
                         </Card.Text>
                     </Card.Body>
                 </Card>

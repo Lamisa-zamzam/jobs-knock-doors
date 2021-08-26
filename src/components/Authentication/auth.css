@@ -100,3 +100,17 @@
     color: #325589;
     text-decoration: none;
 }
+
+@media (max-width: 760px) {
+    .login-container-div {
+        padding: 2%;
+    }
+    .form-column {
+        margin: 0;
+        padding: 0;
+        border-radius: 10px;
+    }
+    .sign-up-link {
+        display: block;
+    }
+}

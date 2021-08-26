@@ -20,14 +20,10 @@ const Jobs = (props) => {
 
     return (
         <Container>
-            <br />
-            <br />
-            <h1 className="mt-5 text-secondary">Your Jobs</h1>
-            <br />
+            <h1 className="mt-5 mb-5 text-secondary">Your Jobs</h1>
             <Row xs={1} md={2} className="g-4">
                 {displayJobs()}
             </Row>
-            <br />
             <div className="d-flex justify-content-end mb-5">
                 <Link to="/search-jobs">
                     <Button className="btn btn-success">See More {">>"}</Button>

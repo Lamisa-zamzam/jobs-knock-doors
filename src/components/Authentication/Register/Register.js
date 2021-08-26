@@ -171,10 +171,9 @@ const Register = (props) => {
                             </h1>
                         </Col>
                         <Col className="form-column" md={5}>
-                            <h4 className="underlineHeading">Sign Up</h4>
-                            <FontAwesomeIcon icon={faTimes} size="1x" />
-                            <br />
-                            <br />
+                            <h4 className="underlineHeading mb-2 mt-4">
+                                Sign Up
+                            </h4>
                             {err && <span className="error">{err}</span>}
                             <Form
                                 onSubmit={handleSubmit(onSubmit)}
@@ -258,7 +257,7 @@ const Register = (props) => {
                                     )}
                                 </Form.Group>
 
-                                <Form.Group>
+                                <Form.Group className="mb-4">
                                     <Form.Label>
                                         Phone with country code
                                     </Form.Label>
@@ -275,9 +274,9 @@ const Register = (props) => {
                                         </span>
                                     )}
                                 </Form.Group>
-                                <br />
 
                                 <Form.Select
+                                    className="mb-4"
                                     aria-label="Your Role"
                                     {...register("role", {
                                         required: true,
@@ -292,7 +291,6 @@ const Register = (props) => {
                                     </option>
                                 </Form.Select>
 
-                                <br />
                                 <Button type="submit" className="submit-button">
                                     Register
                                 </Button>

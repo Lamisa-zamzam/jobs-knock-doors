@@ -1,6 +1,8 @@
+// React Bootstrap
 import { Button, Col, Container, Row } from "react-bootstrap";
+// React Router DOM
 import { Link } from "react-router-dom";
-
+// StyleSheet
 import "./PostJob.css";
 
 const PostJob = () => {

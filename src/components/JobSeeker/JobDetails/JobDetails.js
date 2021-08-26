@@ -1,19 +1,35 @@
-import { Col, Container, Row, Button } from "react-bootstrap";
-import { useParams } from "react-router-dom";
-import { graphql } from "react-apollo";
-
-import "./JobDetails.css";
-import { getJobDetailsQuery } from "../../../queries/queries";
+// React
 import { useEffect, useState } from "react";
+// React Bootstrap
+import { Col, Container, Row, Button } from "react-bootstrap";
+// React Router DOM
+import { useParams } from "react-router-dom";
+// StyleSheet
+import "./JobDetails.css";
+
+// GraphQL for sending and fetching data from GraphQL server
+import { graphql } from "react-apollo";
+// GraphQL Query
+import { getJobDetailsQuery } from "../../../queries/queries";
 
 const JobDetails = ({ data }) => {
-    const windowWidth = window.innerWidth;
+    // Initial state
+    // If data from GraphQL server is still loading
     const [loading, setLoading] = useState(data.loading);
+
+    // Get the width of the window
+    const windowWidth = window.innerWidth;
+
+    // Get id from the URL parameter
     const { id } = useParams();
+
+    // Get the job from data sent from server
     const { job } = data;
 
+    // Set the job Id in the sessionStorage
     sessionStorage.setItem("jobId", id);
 
+    // If data is loaded, set loading state to false
     useEffect(() => {
         if (!data.loading) {
             setLoading(false);
@@ -33,6 +49,7 @@ const JobDetails = ({ data }) => {
                         </small>
                     </div>
                     <div
+                        // Use window's inner-width for responsiveness
                         className={
                             windowWidth > 760
                                 ? "d-flex justify-content-end m-3"
@@ -180,6 +197,8 @@ const JobDetails = ({ data }) => {
                                 )}
                                 <hr />
                             </div>
+                            {/* We need a button at the end of the page for smaller devices for
+                            convenience of the job seeker */}
                             {windowWidth < 760 && (
                                 <Button variant="success" className="mb-5">
                                     Apply For this Job
@@ -196,7 +215,7 @@ const JobDetails = ({ data }) => {
 };
 
 export default graphql(getJobDetailsQuery, {
-    options: (props) => {
+    options: () => {
         return {
             variables: {
                 id: sessionStorage.getItem("jobId"),

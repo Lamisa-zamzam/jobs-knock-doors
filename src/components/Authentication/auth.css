@@ -88,19 +88,12 @@
     font-weight: 100;
 }
 
-.react-link:-webkit-any-link {
-    text-decoration: none;
-}
-
-.react-link:hover {
-    text-decoration: none;
-}
-
 .react-link {
     color: #325589;
     text-decoration: none;
 }
 
+/* Responsiveness */
 @media (max-width: 760px) {
     .login-container-div {
         padding: 2%;

@@ -1,4 +1,6 @@
+// React Bootstrap
 import { Card, Col } from "react-bootstrap";
+// React Router
 import { Link } from "react-router-dom";
 
 const Job = ({ job }) => {

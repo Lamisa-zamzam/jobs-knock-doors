@@ -4,7 +4,7 @@ import { Col, Row, Button } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUserEdit } from "@fortawesome/free-solid-svg-icons";
 
-const ProfileNormal = ({ jobSeekerById, ProfilePicture, setEditing }) => {
+const ProfileNormal = ({ jobSeekerById, setEditing }) => {
     return (
         <>
             <div className="text-center text-success mt-4">
@@ -27,7 +27,7 @@ const ProfileNormal = ({ jobSeekerById, ProfilePicture, setEditing }) => {
                 <Col md={4}>
                     <div className="mt-5">
                         <img
-                            src={ProfilePicture}
+                            src={jobSeekerById.picture}
                             alt="profile"
                             className="profileImage"
                         />

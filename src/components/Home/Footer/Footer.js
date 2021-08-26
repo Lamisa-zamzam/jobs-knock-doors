@@ -1,12 +1,16 @@
+// React Bootstrap
 import { Container, Row, Col } from "react-bootstrap";
+// StyleSheet
 import "./Footer.css";
+// React Router
+import { Link } from "react-router-dom";
+// Font Awesome Icons
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
     faEnvelope,
     faMapMarkerAlt,
     faPhone,
 } from "@fortawesome/free-solid-svg-icons";
-import { Link } from "react-router-dom";
 
 const Footer = () => {
     return (
@@ -41,7 +45,9 @@ const Footer = () => {
                                         <Link to="/profile">Profile</Link>
                                     </li>
                                     <li>
-                                        <Link to="/search-employees">Employees</Link>
+                                        <Link to="/search-employees">
+                                            Employees
+                                        </Link>
                                     </li>
                                     <li>
                                         <Link to="/post-a-job">Post A Job</Link>

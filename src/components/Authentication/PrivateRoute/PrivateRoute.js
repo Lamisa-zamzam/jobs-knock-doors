@@ -1,7 +1,7 @@
 import { Redirect, Route } from "react-router-dom";
 
 const PrivateRoute = ({ children, ...rest }) => {
-    // JWT Token
+    // Id of the user logged in saved at the time of logging in
     const id = sessionStorage.getItem("id");
 
     return (

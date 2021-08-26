@@ -6,13 +6,10 @@ import { Button, Col, Container, Form, Row } from "react-bootstrap";
 import { useForm } from "react-hook-form";
 // Router
 import { Link, useHistory, useLocation } from "react-router-dom";
-// CSS
+// StyleSheet
 import "../auth.css";
-// Font Awesome
-import { faTimes } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-const Login = (props) => {
+const Login = () => {
     // Error State
     const [err, setErr] = useState("");
 
@@ -22,9 +19,10 @@ const Login = (props) => {
     let { from } = location.state || { from: { pathname: "/home" } };
 
     // If the user is already logged in, doesn't make sense to show him/her the login page again
-    if (localStorage.getItem("authToken")) {
+    if (sessionStorage.getItem("id")) {
         history.replace(from);
     }
+
     // React Hook form vars
     const {
         register,
@@ -34,8 +32,9 @@ const Login = (props) => {
 
     // Handle submit
     const onSubmit = async (data) => {
+        // De-structure data
         const { email, password, role } = data;
-        // Send request to get JWT token
+        // Send request to server for logging in depending on the role
         if (role === "jobSeeker") {
             fetch("http://localhost:5000/graphql", {
                 method: "POST",
@@ -59,15 +58,17 @@ const Login = (props) => {
                     },
                 }),
             }).then(async (data) => {
-                // Console log our return data
+                // Convert data from JSON
                 const jobSeeker = await data.json();
                 const { id, email, name } = jobSeeker.data.jobSeeker;
 
+                // Set variables in the sessionStorage
                 sessionStorage.setItem("id", id);
                 sessionStorage.setItem("email", email);
                 sessionStorage.setItem("name", name);
                 sessionStorage.setItem("role", role);
 
+                // Redirect user
                 history.replace(from);
             });
         } else if (role === "employer") {
@@ -93,15 +94,17 @@ const Login = (props) => {
                     },
                 }),
             }).then(async (data) => {
-                // Console log our return data
+                // Convert data from JSON
                 const employer = await data.json();
                 const { id, email, name } = employer.data.employer;
 
+                // Set variables in the sessionStorage
                 sessionStorage.setItem("id", id);
                 sessionStorage.setItem("email", email);
                 sessionStorage.setItem("name", name);
                 sessionStorage.setItem("role", role);
 
+                // Redirect user
                 history.replace(from);
             });
         }
@@ -150,7 +153,8 @@ const Login = (props) => {
                                     />
                                     {errors.email && (
                                         <span className="error">
-                                            This field is required
+                                            This field is required and must be
+                                            valid
                                         </span>
                                     )}
                                 </Form.Group>

@@ -8,23 +8,25 @@ import { useForm } from "react-hook-form";
 import { Link, useHistory, useLocation } from "react-router-dom";
 // CSS
 import "../auth.css";
-// Font awesome
-import { faTimes } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
+// GraphQL for sending and fetching data from GraphQL server
 import { graphql } from "react-apollo";
+// Compose for having multiple queries/mutations in one component
 import * as compose from "lodash.flowright";
+// Mutations
 import {
     addEmployerMutation,
     addJobSeekerMutation,
 } from "../../../queries/queries";
 
 const Register = (props) => {
+    // Initial States
     // Error state
-    const [pass, setPassword] = useState("");
+    const [err, setErr] = useState("");
     // Password variables, in case there is a mismatch
     const [confirmPassword, setConfirmPassword] = useState("");
-    const [err, setErr] = useState("");
+    const [pass, setPassword] = useState("");
+
     // React Hook form variables
     const {
         register,
@@ -38,9 +40,10 @@ const Register = (props) => {
     let { from } = location.state || { from: { pathname: "/home" } };
 
     // If the user is already logged in, doesn't make sense to show him/her the register page again
-    if (localStorage.getItem("authToken")) {
+    if (sessionStorage.getItem("id")) {
         history.replace(from);
     }
+
     // Handle form submit
     const onSubmit = async (data) => {
         // If passwords mismatch
@@ -56,9 +59,10 @@ const Register = (props) => {
             return setErr("Passwords do not match");
         }
 
+        // De-structure form data
         const { username, email, password, phone, role } = data;
-        // Send data to save into DB
 
+        // Send request to server for signing up depending on the role
         if (role === "jobSeeker") {
             await props.addJobSeekerMutation({
                 variables: {
@@ -69,6 +73,7 @@ const Register = (props) => {
                 },
             });
 
+            // Fetch data of the user for saving in the session storage
             fetch("http://localhost:5000/graphql", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
@@ -91,16 +96,16 @@ const Register = (props) => {
                     },
                 }),
             }).then(async (data) => {
-                // Console log our return data
+                // Convert data from JSON
                 const employer = await data.json();
                 const { id, email, name } = employer.data.employer;
 
+                // Set variables in the sessionStorage
                 sessionStorage.setItem("id", id);
                 sessionStorage.setItem("email", email);
                 sessionStorage.setItem("name", name);
                 sessionStorage.setItem("role", role);
             });
-            // history.replace(from);
         } else if (role === "employer") {
             props.addEmployerMutation({
                 variables: {
@@ -111,6 +116,7 @@ const Register = (props) => {
                 },
             });
 
+            // Fetch data of the user for saving in the session storage
             fetch("http://localhost:5000/graphql", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
@@ -133,19 +139,19 @@ const Register = (props) => {
                     },
                 }),
             }).then(async (data) => {
-                // Console log our return data
+                // Convert data from JSON
                 const employer = await data.json();
                 const { id, email, name } = employer.data.employer;
 
+                // Set variables in the sessionStorage
                 sessionStorage.setItem("id", id);
                 sessionStorage.setItem("email", email);
                 sessionStorage.setItem("name", name);
                 sessionStorage.setItem("role", role);
-
-                history.replace(from);
             });
 
-            // history.replace(from);
+            // Redirect user
+            history.replace(from);
         }
     };
 

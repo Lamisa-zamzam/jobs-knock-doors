@@ -1,7 +1,8 @@
-import GetStarted from "./GetStarted/GetStarted";
+// Components
 import Header from "./Header/Header";
 import Jobs from "./Jobs/Jobs";
 import PostJob from "./PostJob/PostJob";
+import GetStarted from "./GetStarted/GetStarted";
 import Footer from "./Footer/Footer";
 
 const Home = () => {

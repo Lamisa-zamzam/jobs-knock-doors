@@ -1,8 +1,11 @@
+// React Bootstrap
 import { Button, Col, Container, Row } from "react-bootstrap";
+// React Router DOOM
 import { Link } from "react-router-dom";
-
+// StyleSheet
 import "./GetStarted.css";
 
+// Static Image
 import job from "../../../images/job-search-recruitment-hiring-employment-vector-21795027.jpg";
 
 const GetStarted = () => {

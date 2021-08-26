@@ -1,5 +1,6 @@
-@media(min-width: 960px){
-    .get-started-div{
+/* Responsiveness */
+@media (min-width: 960px) {
+    .get-started-div {
         margin-top: 15%;
         margin-left: 15%;
     }

@@ -1,8 +1,13 @@
-import { graphql } from "react-apollo";
+// React
 import { useState } from "react";
+// React Bootstrap
 import { Button, Container, Form } from "react-bootstrap";
+// React Hook Form
 import { useForm } from "react-hook-form";
 
+// GraphQL for sending and fetching data from GraphQL server
+import { graphql } from "react-apollo";
+// Mutation
 import { addJobMutation } from "../../../queries/queries";
 
 const MakeAdmin = (props) => {
@@ -34,8 +39,10 @@ const MakeAdmin = (props) => {
             salary,
         } = data;
 
+        // If the job is remote
         const ifRemote = remoteOrNot === "Remote" ? "true" : "false";
 
+        // Send request to add a job to DB
         props.mutate({
             variables: {
                 employerId: sessionStorage.getItem("id"),
@@ -55,6 +62,7 @@ const MakeAdmin = (props) => {
             },
         });
 
+        // Success posting the job
         alert("Job Post Added Successfully!!");
         window.location.reload();
     };

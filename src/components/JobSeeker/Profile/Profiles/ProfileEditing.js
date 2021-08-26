@@ -6,7 +6,7 @@ import { Button, Form } from "react-bootstrap";
 import { useForm } from "react-hook-form";
 // Axios
 import axios from "axios";
-// GraphQL for fetching data from GraphQL server
+// GraphQL for sending and fetching data from GraphQL server
 import { graphql } from "react-apollo";
 // GraphQL Query
 import { updateJobSeekerMutation } from "../../../queries/queries";

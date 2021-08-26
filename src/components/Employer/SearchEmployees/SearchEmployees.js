@@ -1,16 +1,25 @@
-import { Container, Row } from "react-bootstrap";
-import Search from "../../Shared/Search/Search";
-import "./SearchEmployees.css";
-import Employee from "./Employee/Employee";
+// React
 import { useEffect, useState } from "react";
+// React Bootstrap
+import { Container, Row } from "react-bootstrap";
+// StyleSheet
+import "./SearchEmployees.css";
+// Components
+import Search from "../../Shared/Search/Search";
+import Employee from "./Employee/Employee";
 
 const SearchEmployees = () => {
+    // Initial States
+    // For Search
     const [employeeName, setEmployeeName] = useState("");
     const [employeeTitle, setEmployeeTitle] = useState("");
+    // For data from the server
     const [data, setData] = useState([]);
 
+    // Role of the user
     const role = sessionStorage.getItem("role");
 
+    // Get jobs depending on search name and title
     useEffect(() => {
         fetch("http://localhost:5000/graphql", {
             method: "POST",
@@ -34,6 +43,7 @@ const SearchEmployees = () => {
                 },
             }),
         }).then(async (data) => {
+            // Convert data from JSON
             const jobData = await data.json();
             setData(jobData.data.employeeSearch);
         });

@@ -1,23 +1,30 @@
-import { Container } from "react-bootstrap";
-import * as compose from "lodash.flowright";
-import { graphql } from "react-apollo";
-
-import ProfilePicture from "../../../images/knock.jpg";
-
-import "./Profile.css";
-import {
-    getJobSeekerByIdQuery,
-    updateJobSeekerMutation,
-} from "../../../queries/queries";
+// React
 import { useEffect, useState } from "react";
-import ProfileNormal from "./ProfileNormal";
-import ProfileEditing from "./ProfileEditing";
+// React Bootstrap
+import { Container } from "react-bootstrap";
+// StyleSheet
+import "./Profile.css";
+
+// Components
+import ProfileNormal from "./Profiles/ProfileNormal";
+import ProfileEditing from "./Profiles/ProfileEditing";
+
+// GraphQL for sending and fetching data from GraphQL server
+import { graphql } from "react-apollo";
+// GraphQL query
+import { getJobSeekerByIdQuery } from "../../../queries/queries";
 
 const Profile = ({ data }) => {
+    // Initial States
+    // If the user is editing the profile
     const [editing, setEditing] = useState(false);
+    // If data from GraphQL server is still loading
     const [loading, setLoading] = useState(data.loading);
+
+    // Get the Job Seeker logged in from data
     const { jobSeekerById } = data;
 
+    // If data is loaded, set loading state to false
     useEffect(() => {
         if (!data.loading) {
             setLoading(false);
@@ -26,11 +33,12 @@ const Profile = ({ data }) => {
 
     return (
         <Container>
+            {/* If data is not loading show components */}
             {!loading ? (
+                // Show different components based on editing state
                 !editing ? (
                     <ProfileNormal
                         jobSeekerById={jobSeekerById}
-                        ProfilePicture={ProfilePicture}
                         editing={editing}
                         setEditing={setEditing}
                     />
@@ -39,7 +47,6 @@ const Profile = ({ data }) => {
                         editing={editing}
                         setEditing={setEditing}
                         jobSeekerById={jobSeekerById}
-                        ProfilePicture={ProfilePicture}
                     />
                 )
             ) : (
@@ -50,7 +57,7 @@ const Profile = ({ data }) => {
 };
 
 export default graphql(getJobSeekerByIdQuery, {
-    options: (props) => {
+    options: () => {
         return {
             variables: {
                 id: sessionStorage.getItem("id"),

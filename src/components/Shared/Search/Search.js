@@ -4,7 +4,7 @@ const Search = ({ labels, placeholders, states, changeStateFuncs }) => {
     return (
         <Form className="mx-2 my-5">
             <Row>
-                <Col>
+                <Col md={4}>
                     <Form.Group>
                         <Form.Label>{labels[0]}</Form.Label>
                         <Form.Control
@@ -16,8 +16,9 @@ const Search = ({ labels, placeholders, states, changeStateFuncs }) => {
                             }
                         />
                     </Form.Group>
+                    <br />
                 </Col>
-                <Col>
+                <Col md={4}>
                     <Form.Group>
                         <Form.Label>{labels[1]}</Form.Label>
                         <Form.Control
@@ -30,7 +31,7 @@ const Search = ({ labels, placeholders, states, changeStateFuncs }) => {
                         />
                     </Form.Group>
                 </Col>
-                <Col>
+                <Col md={4}>
                     <Button variant="success" style={{ marginTop: "32px" }}>
                         Search
                     </Button>

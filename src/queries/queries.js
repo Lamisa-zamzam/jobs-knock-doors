@@ -140,6 +140,31 @@ const getEmployeeQuery = gql`
     }
 `;
 
+const getJobSeekerByIdQuery = gql`
+    query ($id: String!) {
+        jobSeekerById(id: $id) {
+            id
+            name
+            title
+
+            email
+            phone
+            image
+            location
+            summary
+            experience {
+                title
+                company
+                location
+                jobType
+                date
+                description
+            }
+            skills
+        }
+    }
+`;
+
 export {
     getEmployeesQuery,
     getJobsQuery,
@@ -148,4 +173,5 @@ export {
     getJobDetailsQuery,
     addJobSeekerMutation,
     getEmployeeQuery,
+    getJobSeekerByIdQuery,
 };

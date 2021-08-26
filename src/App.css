@@ -11,3 +11,7 @@
 .react-link:hover {
     text-decoration: none;
 }
+
+.home-section-container {
+    margin-top: 150px;
+}

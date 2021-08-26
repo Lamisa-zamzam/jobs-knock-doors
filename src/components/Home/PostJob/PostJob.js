@@ -5,14 +5,7 @@ import "./PostJob.css";
 
 const PostJob = () => {
     return (
-        <Container>
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
+        <Container className="home-section-container">
             <Row>
                 <Col md={7}>
                     <div>
@@ -24,7 +17,7 @@ const PostJob = () => {
                         <br />
                         <br />
                         <Link to="/post-a-job">
-                            <Button className="btn btn-success">
+                            <Button className="btn btn-success btn-post-job-home">
                                 Post A Job Now
                             </Button>
                         </Link>
@@ -38,12 +31,6 @@ const PostJob = () => {
                     />
                 </Col>
             </Row>
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
         </Container>
     );
 };

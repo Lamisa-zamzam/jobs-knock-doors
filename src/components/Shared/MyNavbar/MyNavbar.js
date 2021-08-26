@@ -5,7 +5,7 @@ import "./MyNavbar.css";
 import knock from "../../../images/knock.jpg";
 
 const MyNavbar = () => {
-    const id = "60799c3a92b36b4d686c1d80";
+    const id = sessionStorage.getItem("id");
     return (
         <Navbar variant="dark" bg="dark" expand="lg">
             <Navbar.Brand as={Link} to="/home" className="brandName">
@@ -22,20 +22,26 @@ const MyNavbar = () => {
                     <Nav.Link as={Link} to="/search-jobs" className="navLink">
                         Jobs
                     </Nav.Link>
-                    <Nav.Link
-                        as={Link}
-                        to={`/profile/${id}`}
-                        className="navLink"
-                    >
-                        Profile
-                    </Nav.Link>
+                    {id && (
+                        <Nav.Link
+                            as={Link}
+                            to={`/profile/${id}`}
+                            className="navLink"
+                        >
+                            Profile
+                        </Nav.Link>
+                    )}
                     <Nav.Link as={Link} to="/login" className="navLink">
                         Login
                     </Nav.Link>
                     <Nav.Link as={Link} to="/register" className="navLink">
                         Register
                     </Nav.Link>
-                    <Nav.Link as={Link} to="/search-employees" className="navLink">
+                    <Nav.Link
+                        as={Link}
+                        to="/search-employees"
+                        className="navLink"
+                    >
                         Employees
                     </Nav.Link>
                 </Nav>

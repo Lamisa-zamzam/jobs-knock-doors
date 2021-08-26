@@ -1,5 +1,3 @@
-// React
-import { useState } from "react";
 // React Bootstrap
 import { Button, Container, Form } from "react-bootstrap";
 // React Hook Form
@@ -11,9 +9,6 @@ import { graphql } from "react-apollo";
 import { addJobMutation } from "../../../queries/queries";
 
 const MakeAdmin = (props) => {
-    // Initial States
-    const [error, setError] = useState(null);
-
     // React Router Form Vars
     const {
         register,
@@ -91,7 +86,13 @@ const MakeAdmin = (props) => {
                                             required: true,
                                         })}
                                     />
+                                    {errors.title && (
+                                        <span className="error">
+                                            Job Title is required
+                                        </span>
+                                    )}
                                 </Form.Group>
+
                                 <Form.Group className="mb-3">
                                     <Form.Label>Company</Form.Label>
                                     <Form.Control
@@ -101,6 +102,11 @@ const MakeAdmin = (props) => {
                                             required: true,
                                         })}
                                     />
+                                    {errors.company && (
+                                        <span className="error">
+                                            Company is required
+                                        </span>
+                                    )}
                                 </Form.Group>
                                 <Form.Group className="mb-3">
                                     <Form.Label>Location</Form.Label>
@@ -111,6 +117,11 @@ const MakeAdmin = (props) => {
                                             required: true,
                                         })}
                                     />
+                                    {errors.location && (
+                                        <span className="error">
+                                            Location is required
+                                        </span>
+                                    )}
                                 </Form.Group>
                                 <Form.Group className="mb-3">
                                     <Form.Label>Experience</Form.Label>
@@ -121,6 +132,11 @@ const MakeAdmin = (props) => {
                                             required: true,
                                         })}
                                     />
+                                    {errors.experience && (
+                                        <span className="error">
+                                            Experience is required
+                                        </span>
+                                    )}
                                 </Form.Group>
                                 <Form.Group className="mb-3">
                                     <Form.Label>Salary</Form.Label>
@@ -129,6 +145,11 @@ const MakeAdmin = (props) => {
                                         placeholder="e.g. $25 per hour"
                                         {...register("salary")}
                                     />
+                                    {errors.salary && (
+                                        <span className="error">
+                                            Salary is required
+                                        </span>
+                                    )}
                                 </Form.Group>
                                 <Form.Group className="mb-3" controlId="">
                                     <Form.Label>About the company</Form.Label>
@@ -139,6 +160,11 @@ const MakeAdmin = (props) => {
                                             required: true,
                                         })}
                                     />
+                                    {errors.aboutCompany && (
+                                        <span className="error">
+                                            Info about company is required
+                                        </span>
+                                    )}
                                 </Form.Group>
                                 <Form.Group className="mb-3" controlId="">
                                     <Form.Label>Job Description</Form.Label>
@@ -149,6 +175,11 @@ const MakeAdmin = (props) => {
                                             required: true,
                                         })}
                                     />
+                                    {errors.jobDescription && (
+                                        <span className="error">
+                                            Job Description is required
+                                        </span>
+                                    )}
                                 </Form.Group>
                                 <Form.Group className="mb-3" controlId="">
                                     <Form.Label>Responsibilities</Form.Label>
@@ -167,6 +198,11 @@ const MakeAdmin = (props) => {
                                             required: true,
                                         })}
                                     />
+                                    {errors.requirements && (
+                                        <span className="error">
+                                            Requirements is required
+                                        </span>
+                                    )}
                                 </Form.Group>
                                 <Form.Group className="mb-3" controlId="">
                                     <Form.Label>Facilities</Form.Label>
@@ -191,6 +227,12 @@ const MakeAdmin = (props) => {
                                     <option value="Volunteer">Volunteer</option>
                                 </Form.Select>
 
+                                {errors.jobType && (
+                                    <span className="error">
+                                        Job Type is required
+                                    </span>
+                                )}
+
                                 <Form.Select
                                     className="mb-4"
                                     aria-label="Seniority Level"
@@ -205,6 +247,12 @@ const MakeAdmin = (props) => {
                                     </option>
                                     <option value="Entry">Entry</option>
                                 </Form.Select>
+                                {errors.seniorityLevel && (
+                                    <span className="error">
+                                        Seniority Level is required
+                                    </span>
+                                )}
+
                                 <Form.Select
                                     className="mb-4"
                                     aria-label="Remote or Not"
@@ -216,7 +264,13 @@ const MakeAdmin = (props) => {
                                     <option value="Remote">Remote</option>
                                     <option value="In-office">In-office</option>
                                 </Form.Select>
-                                <p>{error}</p>
+
+                                {errors.remoteOrNot && (
+                                    <span className="error">
+                                        Remote or Not is required
+                                    </span>
+                                )}
+
                                 <Button
                                     variant="success"
                                     type="submit"

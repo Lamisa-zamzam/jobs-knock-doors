@@ -9,7 +9,7 @@ import axios from "axios";
 // GraphQL for sending and fetching data from GraphQL server
 import { graphql } from "react-apollo";
 // GraphQL Query
-import { updateJobSeekerMutation } from "../../../queries/queries";
+import { updateJobSeekerMutation } from "../../../../queries/queries";
 
 const ProfileEditing = (props) => {
     // Initial States
@@ -17,11 +17,7 @@ const ProfileEditing = (props) => {
     const [imageURL, setImageURL] = useState(null);
 
     // React Router Form Vars
-    const {
-        register,
-        handleSubmit,
-        formState: { errors },
-    } = useForm();
+    const { register, handleSubmit } = useForm();
 
     // Handle imgbb image upload
     const handleImageUpload = (event) => {
@@ -49,12 +45,12 @@ const ProfileEditing = (props) => {
         props.mutate({
             variables: {
                 id: sessionStorage.getItem("id"),
-                image: imageURL,
-                title,
-                phone,
-                location,
-                summary,
-                skills,
+                image: imageURL ? imageURL : "",
+                title: title ? title : "",
+                phone: phone ? phone : "",
+                location: location ? location : "",
+                summary: summary ? summary : "",
+                skills: skills ? skills : "",
             },
         });
 
@@ -72,9 +68,7 @@ const ProfileEditing = (props) => {
                     <Form.Control
                         type="text"
                         placeholder="e.g. Full Stack Engineer"
-                        {...register("title", {
-                            required: true,
-                        })}
+                        {...register("title")}
                     />
                 </Form.Group>
                 <Form.Group className="mb-3">
@@ -82,9 +76,7 @@ const ProfileEditing = (props) => {
                     <Form.Control
                         type="text"
                         placeholder="Your Phone Number"
-                        {...register("phone", {
-                            required: true,
-                        })}
+                        {...register("phone")}
                     />
                 </Form.Group>
                 <Form.Group className="mb-3">
@@ -92,9 +84,7 @@ const ProfileEditing = (props) => {
                     <Form.Control
                         type="text"
                         placeholder="e.g. Rosario, Argentina"
-                        {...register("location", {
-                            required: true,
-                        })}
+                        {...register("location")}
                     />
                 </Form.Group>
 
@@ -104,9 +94,7 @@ const ProfileEditing = (props) => {
                         placeholder="I am a..."
                         as="textarea"
                         rows={3}
-                        {...register("summary", {
-                            required: true,
-                        })}
+                        {...register("summary")}
                     />
                 </Form.Group>
 
@@ -115,9 +103,7 @@ const ProfileEditing = (props) => {
                     <Form.Control
                         type="text"
                         placeholder="JS, React, Node"
-                        {...register("skills", {
-                            required: true,
-                        })}
+                        {...register("skills")}
                     />
                 </Form.Group>
 

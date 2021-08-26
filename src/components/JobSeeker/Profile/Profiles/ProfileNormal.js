@@ -27,7 +27,7 @@ const ProfileNormal = ({ jobSeekerById, setEditing }) => {
                 <Col md={4}>
                     <div className="mt-5">
                         <img
-                            src={jobSeekerById.picture}
+                            src={jobSeekerById?.image}
                             alt="profile"
                             className="profileImage"
                         />

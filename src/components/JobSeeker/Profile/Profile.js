@@ -2,6 +2,8 @@
 import { useEffect, useState } from "react";
 // React Bootstrap
 import { Container } from "react-bootstrap";
+// React Router
+import { useParams } from "react-router-dom";
 // StyleSheet
 import "./Profile.css";
 
@@ -15,6 +17,9 @@ import { graphql } from "react-apollo";
 import { getJobSeekerByIdQuery } from "../../../queries/queries";
 
 const Profile = ({ data }) => {
+    // Get id from parameters
+    const { id } = useParams();
+    sessionStorage.setItem("employerId", id);
     // Initial States
     // If the user is editing the profile
     const [editing, setEditing] = useState(false);
@@ -42,11 +47,17 @@ const Profile = ({ data }) => {
                         editing={editing}
                         setEditing={setEditing}
                     />
-                ) : (
+                ) : sessionStorage.getItem("role") === "jobSeeker" ? (
                     <ProfileEditing
                         editing={editing}
                         setEditing={setEditing}
                         jobSeekerById={jobSeekerById}
+                    />
+                ) : (
+                    <ProfileNormal
+                        jobSeekerById={jobSeekerById}
+                        editing={editing}
+                        setEditing={setEditing}
                     />
                 )
             ) : (
@@ -60,7 +71,7 @@ export default graphql(getJobSeekerByIdQuery, {
     options: () => {
         return {
             variables: {
-                id: sessionStorage.getItem("id"),
+                id: sessionStorage.getItem("employerId"),
             },
         };
     },

@@ -1,16 +1,19 @@
-import { Container, Row } from "react-bootstrap";
-import Search from "../../Shared/Search/Search";
-
-import "./SearchJobs.css";
-
-import Job from "../../Home/Jobs/Job/Job";
+// React
 import { useEffect, useState } from "react";
+// React Bootstrap
+import { Container, Row } from "react-bootstrap";
+
+// Components
+import Search from "../../Shared/Search/Search";
+import Job from "../../Home/Jobs/Job/Job";
 
 const SearchJobs = () => {
+    // Initial States
     const [jobTitle, setJobTitle] = useState("");
     const [location, setLocation] = useState("");
     const [data, setData] = useState([]);
 
+    // Get jobs depending on search title and location
     useEffect(() => {
         fetch("http://localhost:5000/graphql", {
             method: "POST",
@@ -34,7 +37,9 @@ const SearchJobs = () => {
                 },
             }),
         }).then(async (data) => {
+            // Convert data from JSON
             const jobData = await data.json();
+            // Set State
             setData(jobData.data.jobSearch);
         });
     }, [jobTitle, location]);

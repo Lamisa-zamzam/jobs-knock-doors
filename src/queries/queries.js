@@ -1,20 +1,9 @@
 // graphql
-
 import { gql } from "apollo-boost";
 
-const getEmployeesQuery = gql`
-    {
-        jobSeekers {
-            id
-            name
-            title
-            image
-            location
-            email
-        }
-    }
-`;
+// Queries
 
+// Get all the jobs
 const getJobsQuery = gql`
     {
         jobs {
@@ -28,6 +17,7 @@ const getJobsQuery = gql`
     }
 `;
 
+// Get a job detail
 const getJobDetailsQuery = gql`
     query ($id: ID!) {
         job(id: $id) {
@@ -52,6 +42,34 @@ const getJobDetailsQuery = gql`
     }
 `;
 
+// Get a Job Seeker by Id
+const getJobSeekerByIdQuery = gql`
+    query ($id: String!) {
+        jobSeekerById(id: $id) {
+            id
+            name
+            title
+            email
+            phone
+            image
+            location
+            summary
+            experience {
+                title
+                company
+                location
+                jobType
+                date
+                description
+            }
+            skills
+        }
+    }
+`;
+
+// Mutations
+
+// Add a job
 const addJobMutation = gql`
     mutation (
         $title: String!
@@ -91,6 +109,7 @@ const addJobMutation = gql`
     }
 `;
 
+// Add an Employer (register)
 const addEmployerMutation = gql`
     mutation (
         $name: String!
@@ -111,6 +130,7 @@ const addEmployerMutation = gql`
     }
 `;
 
+// Add a job seeker (register)
 const addJobSeekerMutation = gql`
     mutation (
         $name: String!
@@ -131,42 +151,17 @@ const addJobSeekerMutation = gql`
     }
 `;
 
-const getEmployeeQuery = gql`
-    {
-        jobSeeker(email: "johndoe@gmail.com", password: "test") {
-            name
-            title
-        }
-    }
-`;
-
-const getJobSeekerByIdQuery = gql`
-    query ($id: String!) {
-        jobSeekerById(id: $id) {
-            id
-            name
-            title
-
-            email
-            phone
-            image
-            location
-            summary
-            experience {
-                title
-                company
-                location
-                jobType
-                date
-                description
-            }
-            skills
-        }
-    }
-`;
-
+// Update the profile of a Job Seeker
 const updateJobSeekerMutation = gql`
-    mutation ($id: String!, $title: String!, $phone: String!, $image: String!, $location: String!, $skills: String!, $summary: String!) {
+    mutation (
+        $id: String!
+        $title: String!
+        $phone: String!
+        $image: String!
+        $location: String!
+        $skills: String!
+        $summary: String!
+    ) {
         updateJobSeeker(
             id: $id
             title: $title
@@ -174,7 +169,7 @@ const updateJobSeekerMutation = gql`
             image: $image
             location: $location
             skills: $skills
-            summary: $summery
+            summary: $summary
         ) {
             name
             location
@@ -182,14 +177,13 @@ const updateJobSeekerMutation = gql`
     }
 `;
 
+// Export all the queries and mutations
 export {
-    getEmployeesQuery,
     getJobsQuery,
     addJobMutation,
     addEmployerMutation,
     getJobDetailsQuery,
     addJobSeekerMutation,
-    getEmployeeQuery,
     getJobSeekerByIdQuery,
     updateJobSeekerMutation,
 };

@@ -1,8 +1,8 @@
-import { faUserEdit } from "@fortawesome/free-solid-svg-icons";
+// React Bootstrap
+import { Col, Row, Button } from "react-bootstrap";
+// Font Awesome Icons
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { Col, Row, Button, Form } from "react-bootstrap";
-import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
+import { faUserEdit } from "@fortawesome/free-solid-svg-icons";
 
 const ProfileNormal = ({ jobSeekerById, ProfilePicture, setEditing }) => {
     return (
@@ -56,7 +56,7 @@ const ProfileNormal = ({ jobSeekerById, ProfilePicture, setEditing }) => {
                 <Col md={8}>
                     <div className="mb-2 mt-4">
                         <small className="fw-bolder">About</small>
-                        <p>{jobSeekerById?.summery}</p>
+                        <p>{jobSeekerById?.summary}</p>
                     </div>
                     <div className="mb-2 mt-4">
                         <small className="fw-bold">Skills</small>
@@ -66,6 +66,8 @@ const ProfileNormal = ({ jobSeekerById, ProfilePicture, setEditing }) => {
                             ))}
                         </ul>
                     </div>
+
+                    {/* Experience is still dummy but its backend is almost done */}
                     <div className="mb-4 mt-4">
                         <small className="fw-bold">Experience</small>
                         <hr />

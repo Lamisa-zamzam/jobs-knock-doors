@@ -12,6 +12,7 @@
     text-decoration: none;
 }
 
+/* Home sections should have some margin at the top */
 .home-section-container {
     margin-top: 150px;
 }

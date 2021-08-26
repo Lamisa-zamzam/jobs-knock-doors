@@ -1,10 +1,15 @@
-import { graphql } from "react-apollo";
+// React
 import { useState } from "react";
-import { Col, Row, Button, Form } from "react-bootstrap";
-import { updateJobSeekerMutation } from "../../../queries/queries";
+// React Bootstrap
+import { Button, Form } from "react-bootstrap";
+// React Hook Form
 import { useForm } from "react-hook-form";
-
+// Axios
 import axios from "axios";
+// GraphQL for fetching data from GraphQL server
+import { graphql } from "react-apollo";
+// GraphQL Query
+import { updateJobSeekerMutation } from "../../../queries/queries";
 
 const ProfileEditing = (props) => {
     // Initial States
@@ -18,14 +23,14 @@ const ProfileEditing = (props) => {
         formState: { errors },
     } = useForm();
 
-    // handles imgbb image upload
+    // Handle imgbb image upload
     const handleImageUpload = (event) => {
         const imageData = new FormData();
-        imageData.set("key", process.env.IMGBB_KEY);
+        imageData.set("key", "b238360b7dd6273493645ed46cb79ec6");
         if (event.target.files[0]) {
             imageData.append("image", event.target.files[0]);
             axios
-                .post(process.env.IMGBB_URL, imageData)
+                .post("https://api.imgbb.com/1/upload", imageData)
                 .then((res) => {
                     setImageURL(res.data.data.display_url);
                 })
@@ -37,26 +42,27 @@ const ProfileEditing = (props) => {
 
     // Handle Form Submit
     const onSubmit = (data) => {
-        // console.log(data);
-
+        // De-structure form data
         const { title, phone, location, summary, skills } = data;
 
-        const updatedData = {};
-
+        // Send mutations in GraphQL server
         props.mutate({
             variables: {
+                id: sessionStorage.getItem("id"),
                 image: imageURL,
                 title,
                 phone,
                 location,
                 summary,
-                skills: skills.split(","),
+                skills,
             },
         });
 
+        // Success on updating Job Seeker profile
         alert("Profile updated successfully!!");
         window.location.reload();
     };
+
     return (
         <>
             <h2 className="text-success text-center mt-4">Edit Your Profile</h2>
@@ -93,12 +99,12 @@ const ProfileEditing = (props) => {
                 </Form.Group>
 
                 <Form.Group className="mb-3">
-                    <Form.Label>Summery</Form.Label>
+                    <Form.Label>Summary</Form.Label>
                     <Form.Control
                         placeholder="I am a..."
                         as="textarea"
                         rows={3}
-                        {...register("summery", {
+                        {...register("summary", {
                             required: true,
                         })}
                     />

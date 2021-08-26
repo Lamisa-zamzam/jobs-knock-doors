@@ -26,14 +26,15 @@
     margin-bottom: -1%;
 }
 
+/* Responsiveness */
 @media (max-width: 960px) {
     .navLink {
         margin-left: 30px;
     }
-    .navLogo{
-        width: 30%
+    .navLogo {
+        width: 30%;
     }
-    .brandSlogan{
+    .brandSlogan {
         margin-left: 35%;
         margin-bottom: 15%;
     }

@@ -1,15 +1,19 @@
+// React
 import React from "react";
 import ReactDOM from "react-dom";
+// StyleSheets
 import "./index.css";
-import App from "./App";
-import reportWebVitals from "./reportWebVitals";
-import { ApolloProvider } from "react-apollo";
 // Bootstrap Styles
 import "bootstrap/dist/css/bootstrap.min.css";
+// Component -- Main app
+import App from "./App";
+// Web Vitals
+import reportWebVitals from "./reportWebVitals";
+// Apollo for consuming GraphQL data
+import { ApolloProvider } from "react-apollo";
 import ApolloClient from "apollo-boost";
-require("dotenv").config({ path: "./.env" });
 
-// apollo client setup
+// Apollo client setup
 const client = new ApolloClient({
     uri: "http://localhost:5000/graphql",
 });

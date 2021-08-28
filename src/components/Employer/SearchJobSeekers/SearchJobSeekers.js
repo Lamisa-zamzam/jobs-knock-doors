@@ -12,7 +12,6 @@ import "./SearchJobSeekers.css";
 
 const SearchJobs = () => {
     // Initial States
-    const [employeeTitle, setEmployeeTitle] = useState("");
     const [employeeName, setEmployeeName] = useState("");
     const [data, setData] = useState([]);
 
@@ -22,9 +21,9 @@ const SearchJobs = () => {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({
-                query: `query($employeeTitle: String!, $employeeName: String!)
+                query: `query($employeeName: String!)
                {
-                    employeeSearch (employeeName: $employeeName, employeeTitle: $employeeTitle){
+                    employeeSearch (employeeName: $employeeName){
                         id
                         image
                         name
@@ -35,7 +34,6 @@ const SearchJobs = () => {
                 }
                 `,
                 variables: {
-                    employeeTitle,
                     employeeName,
                 },
             }),
@@ -45,7 +43,7 @@ const SearchJobs = () => {
             // Set State
             setData(employeeData.data.employeeSearch);
         });
-    }, [employeeTitle, employeeName]);
+    }, [employeeName]);
 
     return (
         <Container>
@@ -53,10 +51,10 @@ const SearchJobs = () => {
                 <h3>Search For Jobs</h3>
             </div>
             <Search
-                labels={["Employee Name", "Employee Title"]}
-                placeholders={["e.g. John Doe", "e.g. Full Stack Developer"]}
-                states={[employeeName, employeeTitle]}
-                changeStateFuncs={[setEmployeeName, setEmployeeTitle]}
+                labels={["Employee Name"]}
+                placeholders={["e.g. John Doe"]}
+                states={[employeeName]}
+                changeStateFuncs={[setEmployeeName]}
             />
             <Row>
                 {data && data[0] ? (

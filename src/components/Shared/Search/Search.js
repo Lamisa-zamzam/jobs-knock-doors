@@ -17,19 +17,21 @@ const Search = ({ labels, placeholders, states, changeStateFuncs }) => {
                         />
                     </Form.Group>
                 </Col>
-                <Col md={4}>
-                    <Form.Group>
-                        <Form.Label>{labels[1]}</Form.Label>
-                        <Form.Control
-                            type="text"
-                            placeholder={placeholders[1]}
-                            value={states[1]}
-                            onChange={(e) =>
-                                changeStateFuncs[1](e.target.value)
-                            }
-                        />
-                    </Form.Group>
-                </Col>
+                {labels[1] && (
+                    <Col md={4}>
+                        <Form.Group>
+                            <Form.Label>{labels[1]}</Form.Label>
+                            <Form.Control
+                                type="text"
+                                placeholder={placeholders[1]}
+                                value={states[1]}
+                                onChange={(e) =>
+                                    changeStateFuncs[1](e.target.value)
+                                }
+                            />
+                        </Form.Group>
+                    </Col>
+                )}
                 <Col md={4}>
                     <Button variant="success" style={{ marginTop: "32px" }}>
                         Search

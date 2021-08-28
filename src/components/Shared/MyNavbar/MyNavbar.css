@@ -1,5 +1,5 @@
 .navLink {
-    margin-right: 10%;
+    margin-left: 30px;
     color: white !important;
 }
 
@@ -28,9 +28,6 @@
 
 /* Responsiveness */
 @media (max-width: 960px) {
-    .navLink {
-        margin-left: 30px;
-    }
     .navLogo {
         width: 30%;
     }

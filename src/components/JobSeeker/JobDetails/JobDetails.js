@@ -1,5 +1,3 @@
-// React
-import { useEffect, useState } from "react";
 // React Bootstrap
 import { Col, Container, Row, Button } from "react-bootstrap";
 // React Router DOM
@@ -13,10 +11,6 @@ import { graphql } from "react-apollo";
 import { getJobDetailsQuery } from "../../../queries/queries";
 
 const JobDetails = ({ data }) => {
-    // Initial state
-    // If data from GraphQL server is still loading
-    const [loading, setLoading] = useState(data.loading);
-
     // Get the width of the window
     const windowWidth = window.innerWidth;
 
@@ -29,16 +23,9 @@ const JobDetails = ({ data }) => {
     // Set the job Id in the sessionStorage
     sessionStorage.setItem("jobId", id);
 
-    // If data is loaded, set loading state to false
-    useEffect(() => {
-        if (!data.loading) {
-            setLoading(false);
-        }
-    }, [data.loading]);
-
     return (
         <Container>
-            {!loading ? (
+            {!data.loading ? (
                 <>
                     <div className="text-center text-success">
                         <h1>

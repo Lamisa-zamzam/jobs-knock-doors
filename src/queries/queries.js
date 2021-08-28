@@ -10,6 +10,7 @@ const getJobsQuery = gql`
             id
             title
             company
+            location
             jobType
             remote
             experience

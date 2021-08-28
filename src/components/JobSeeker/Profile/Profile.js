@@ -1,5 +1,5 @@
 // React
-import { useEffect, useState } from "react";
+import { useState } from "react";
 // React Bootstrap
 import { Container } from "react-bootstrap";
 // React Router
@@ -23,23 +23,14 @@ const Profile = ({ data }) => {
     // Initial States
     // If the user is editing the profile
     const [editing, setEditing] = useState(false);
-    // If data from GraphQL server is still loading
-    const [loading, setLoading] = useState(data.loading);
 
     // Get the Job Seeker logged in from data
     const { jobSeekerById } = data;
 
-    // If data is loaded, set loading state to false
-    useEffect(() => {
-        if (!data.loading) {
-            setLoading(false);
-        }
-    }, [data.loading]);
-
     return (
         <Container>
             {/* If data is not loading show components */}
-            {!loading ? (
+            {!data.loading ? (
                 // Show different components based on editing state
                 !editing ? (
                     <ProfileNormal
@@ -48,11 +39,7 @@ const Profile = ({ data }) => {
                         setEditing={setEditing}
                     />
                 ) : sessionStorage.getItem("role") === "jobSeeker" ? (
-                    <ProfileEditing
-                        editing={editing}
-                        setEditing={setEditing}
-                        jobSeekerById={jobSeekerById}
-                    />
+                    <ProfileEditing jobSeekerById={jobSeekerById} />
                 ) : (
                     <ProfileNormal
                         jobSeekerById={jobSeekerById}

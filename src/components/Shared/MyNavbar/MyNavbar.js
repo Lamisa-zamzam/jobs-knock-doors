@@ -39,10 +39,10 @@ const MyNavbar = () => {
                     </Nav.Link>
                     <Nav.Link
                         as={Link}
-                        to="/search-employees"
+                        to="/search-jobSeekers"
                         className="navLink"
                     >
-                        Employees
+                        Job Seekers
                     </Nav.Link>
                 </Nav>
             </Navbar.Collapse>

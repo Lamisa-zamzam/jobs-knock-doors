@@ -25,6 +25,7 @@ const SearchJobs = () => {
                         id
                         title
                         company
+                        location
                         jobType
                         remote
                         experience

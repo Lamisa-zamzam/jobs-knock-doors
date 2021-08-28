@@ -11,16 +11,18 @@ import { graphql } from "react-apollo";
 // GraphQL Query
 import { updateJobSeekerMutation } from "../../../../queries/queries";
 
-const ProfileEditing = (props) => {
+const ProfileEditing = ({ jobSeekerById, mutate }) => {
     // Initial States
     const [error, setError] = useState(null);
     const [imageURL, setImageURL] = useState(null);
+    const [settingImage, setSettingImage] = useState(null);
 
     // React Router Form Vars
     const { register, handleSubmit } = useForm();
 
     // Handle imgbb image upload
     const handleImageUpload = (event) => {
+        setSettingImage(true);
         const imageData = new FormData();
         imageData.set("key", "b238360b7dd6273493645ed46cb79ec6");
         if (event.target.files[0]) {
@@ -42,15 +44,15 @@ const ProfileEditing = (props) => {
         const { title, phone, location, summary, skills } = data;
 
         // Send mutations in GraphQL server
-        props.mutate({
+        mutate({
             variables: {
                 id: sessionStorage.getItem("id"),
-                image: imageURL ? imageURL : "",
-                title: title ? title : "",
-                phone: phone ? phone : "",
-                location: location ? location : "",
-                summary: summary ? summary : "",
-                skills: skills ? skills : "",
+                image: imageURL ? imageURL : jobSeekerById.image,
+                title: title ? title : jobSeekerById.title,
+                phone: phone ? phone : jobSeekerById.phone,
+                location: location ? location : jobSeekerById.phone,
+                summary: summary ? summary : jobSeekerById.summary,
+                skills: skills ? skills : jobSeekerById.skills.toString(),
             },
         });
 
@@ -119,7 +121,22 @@ const ProfileEditing = (props) => {
 
                 <p>{error}</p>
 
-                {imageURL ? (
+                {settingImage ? (
+                    imageURL ? (
+                        <Button
+                            variant="success"
+                            type="submit"
+                            className="w-100 mb-5"
+                        >
+                            Save
+                        </Button>
+                    ) : (
+                        <p>
+                            You will be able to submit this form as soon as your
+                            image is ready to be uploaded.
+                        </p>
+                    )
+                ) : (
                     <Button
                         variant="success"
                         type="submit"
@@ -127,11 +144,6 @@ const ProfileEditing = (props) => {
                     >
                         Save
                     </Button>
-                ) : (
-                    <p>
-                        You will be able to submit this form as soon as your
-                        image is ready to be uploaded.
-                    </p>
                 )}
             </Form>
         </>

@@ -3,16 +3,16 @@ import { useEffect, useState } from "react";
 // React Bootstrap
 import { Container, Row } from "react-bootstrap";
 // StyleSheet
-import "./SearchEmployees.css";
+import "./SearchJobSeekers.css";
 // Components
 import Search from "../../Shared/Search/Search";
-import Employee from "./Employee/Employee";
+import JobSeeker from "../SearchEmployees/JobSeeker/JobSeeker";
 
-const SearchEmployees = () => {
+const SearchJobSeekers = () => {
     // Initial States
     // For Search
-    const [employeeName, setEmployeeName] = useState("");
-    const [employeeTitle, setEmployeeTitle] = useState("");
+    const [jobSeekerName, setJobSeekerName] = useState("");
+    const [jobSeekerTitle, setJobSeekerTitle] = useState("");
     // For data from the server
     const [data, setData] = useState([]);
 
@@ -25,9 +25,9 @@ const SearchEmployees = () => {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({
-                query: `query($employeeName: String!, $employeeTitle: String!)
+                query: `query($jobSeekerName: String!, $jobSeekerTitle: String!)
                 {
-                    employeeSearch (employeeName: $employeeName, employeeTitle: $employeeTitle){
+                    jobSeekerSearch (jobSeekerName: $jobSeekerName, jobSeekerTitle: $jobSeekerTitle){
                         id
                         image
                         name
@@ -38,37 +38,37 @@ const SearchEmployees = () => {
                 }
                 `,
                 variables: {
-                    employeeName,
-                    employeeTitle,
+                    jobSeekerName: jobSeekerName,
+                    jobSeekerTitle: jobSeekerTitle,
                 },
             }),
         }).then(async (data) => {
             // Convert data from JSON
             const jobData = await data.json();
-            setData(jobData.data.employeeSearch);
+            setData(jobData.data.jobSeekerSearch);
         });
-    }, [employeeName, employeeTitle]);
+    }, [jobSeekerName, jobSeekerTitle]);
 
     return (
         <Container>
             {role === "employer" ? (
                 <>
                     <div className="d-flex justify-contents-center text-success mx-2 my-4">
-                        <h3>Search For Employees</h3>
+                        <h3>Search For job Seekers</h3>
                     </div>
                     <Search
-                        labels={["Employee Name", "Title"]}
+                        labels={["JobSeeker Name", "Title"]}
                         placeholders={[
                             "e.g. John Doe",
                             "e.g. Full Stack Developer",
                         ]}
-                        states={[employeeName, employeeTitle]}
-                        changeStateFuncs={[setEmployeeName, setEmployeeTitle]}
+                        states={[jobSeekerName, jobSeekerTitle]}
+                        changeStateFuncs={[setJobSeekerName, setJobSeekerTitle]}
                     />
                     <Row>
                         {data && data[0] ? (
                             data.map((jobSeeker) => (
-                                <Employee
+                                <JobSeeker
                                     key={jobSeeker.id}
                                     jobSeeker={jobSeeker}
                                 />
@@ -80,12 +80,12 @@ const SearchEmployees = () => {
                 </>
             ) : (
                 <p className="text-muted m-5 fs-3">
-                    You need to be an employer to see the list of employees and
-                    search them
+                    You need to be an employer to see the list of Job Seekers
+                    and search them
                 </p>
             )}
         </Container>
     );
 };
 
-export default SearchEmployees;
+export default SearchJobSeekers;

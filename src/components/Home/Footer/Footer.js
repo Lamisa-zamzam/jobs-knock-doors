@@ -45,8 +45,8 @@ const Footer = () => {
                                         <Link to="/profile">Profile</Link>
                                     </li>
                                     <li>
-                                        <Link to="/search-employees">
-                                            Employees
+                                        <Link to="/search-jobSeekers">
+                                            Job Seekers
                                         </Link>
                                     </li>
                                     <li>

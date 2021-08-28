@@ -1,7 +1,7 @@
 import { Card, Col, Row } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
-const Employee = ({ jobSeeker }) => {
+const JobSeeker = ({ jobSeeker }) => {
     const { id, name, title, image, location, email } = jobSeeker;
     return (
         <Link to={`profile/${id}`} className="react-link">
@@ -13,7 +13,7 @@ const Employee = ({ jobSeeker }) => {
                                 <img
                                     src={image}
                                     alt="profile"
-                                    className="employee-picture"
+                                    className="jobSeeker-picture"
                                 />
                             </Col>
                             <Col md={9}>
@@ -34,4 +34,4 @@ const Employee = ({ jobSeeker }) => {
     );
 };
 
-export default Employee;
+export default JobSeeker;

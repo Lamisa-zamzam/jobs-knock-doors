@@ -18,7 +18,7 @@ import SearchJobs from "./components/JobSeeker/SearchJobs/SearchJobs";
 import JobDetails from "./components/JobSeeker/JobDetails/JobDetails";
 // For Employers
 import PostAJob from "./components/Employer/PostAJob/PostAJob";
-import SearchEmployees from "./components/Employer/SearchEmployees/SearchEmployees";
+import SearchJobSeekers from "./components/Employer/SearchJobSeekers/SearchJobSeekers";
 
 function App() {
     return (
@@ -54,8 +54,8 @@ function App() {
                 <PrivateRoute path="/post-a-job">
                     <PostAJob />
                 </PrivateRoute>
-                <PrivateRoute path="/search-employees">
-                    <SearchEmployees />
+                <PrivateRoute path="/search-jobSeekers">
+                    <SearchJobSeekers />
                 </PrivateRoute>
             </Switch>
         </Router>

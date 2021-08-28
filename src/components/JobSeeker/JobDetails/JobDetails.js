@@ -9,6 +9,7 @@ import "./JobDetails.css";
 import { graphql } from "react-apollo";
 // GraphQL Query
 import { getJobDetailsQuery } from "../../../queries/queries";
+import { useEffect } from "react";
 
 const JobDetails = ({ data }) => {
     // Get the width of the window
@@ -20,8 +21,12 @@ const JobDetails = ({ data }) => {
     // Get the job from data sent from server
     const { job } = data;
 
-    // Set the job Id in the sessionStorage
-    sessionStorage.setItem("jobId", id);
+    useEffect(() => {
+        (async () => {
+            // Set the job Id in the sessionStorage
+            await sessionStorage.setItem("jobId", id);
+        })();
+    }, [id]);
 
     return (
         <Container>
@@ -202,10 +207,10 @@ const JobDetails = ({ data }) => {
 };
 
 export default graphql(getJobDetailsQuery, {
-    options: () => {
+    options: (props) => {
         return {
             variables: {
-                id: sessionStorage.getItem("jobId"),
+                id: props.data.job.id,
             },
         };
     },

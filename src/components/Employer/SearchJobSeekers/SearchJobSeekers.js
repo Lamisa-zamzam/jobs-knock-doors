@@ -21,31 +21,39 @@ const SearchJobSeekers = () => {
 
     // Get jobs depending on search name and title
     useEffect(() => {
-        fetch("https://aqueous-meadow-34034.herokuapp.com/graphql", {
+        fetch("http://localhost:5000/graphql", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({
-                query: `query($jobSeekerName: String!, $jobSeekerTitle: String!)
-                {
-                    jobSeekerSearch (jobSeekerName: $jobSeekerName, jobSeekerTitle: $jobSeekerTitle){
-                        id
-                        image
-                        name
-                        title
-                        location
-                        email
+                query: `{
+                    jobSeekers{
+                      name
+                      email
                     }
-                }
+                  }
                 `,
-                variables: {
-                    jobSeekerName: jobSeekerName,
-                    jobSeekerTitle: jobSeekerTitle,
-                },
+                // variables: {
+                //     jobSeekerName: jobSeekerName,
+                //     jobSeekerTitle: jobSeekerTitle,
+                // },
+
+                // query($jobSeekerName: String!, $jobSeekerTitle: String!)
+                // {
+                //     jobSeekerSearch (jobSeekerName: $jobSeekerName, jobSeekerTitle: $jobSeekerTitle){
+                //         id
+                //         image
+                //         name
+                //         title
+                //         location
+                //         email
+                //     }
+                // }
             }),
         }).then(async (data) => {
+            console.log(data);
             // Convert data from JSON
             const jobData = await data.json();
-            setData(jobData.data.jobSeekerSearch);
+            setData(jobData.data.jobSeekers);
         });
     }, [jobSeekerName, jobSeekerTitle]);
 

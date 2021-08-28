@@ -4,8 +4,8 @@ import { Link } from "react-router-dom";
 const JobSeeker = ({ jobSeeker }) => {
     const { id, name, title, image, location, email } = jobSeeker;
     return (
-        <Link to={`profile/${id}`} className="react-link">
-            <Col>
+        <Col md={4} className="mb-5">
+            <Link to={`profile/${id}`} className="react-link">
                 <Card>
                     <Card.Body>
                         <Row>
@@ -29,8 +29,8 @@ const JobSeeker = ({ jobSeeker }) => {
                         </Card.Text>
                     </Card.Body>
                 </Card>
-            </Col>
-        </Link>
+            </Link>
+        </Col>
     );
 };
 

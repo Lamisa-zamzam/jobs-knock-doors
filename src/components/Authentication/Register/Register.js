@@ -80,7 +80,7 @@ const Register = (props) => {
                 body: JSON.stringify({
                     query: `query($email: String!, $password: String!)
                     {
-                        employer(
+                        jobSeeker(
                             email: $email
                             password: $password
                         ) {
@@ -96,9 +96,10 @@ const Register = (props) => {
                     },
                 }),
             }).then(async (data) => {
+                console.log(data);
                 // Convert data from JSON
-                const employer = await data.json();
-                const { id, email, name } = employer.data.employer;
+                const jobSeeker = await data.json();
+                const { id, email, name } = jobSeeker.data.jobSeeker;
 
                 // Set variables in the sessionStorage
                 sessionStorage.setItem("id", id);
@@ -149,10 +150,10 @@ const Register = (props) => {
                 sessionStorage.setItem("name", name);
                 sessionStorage.setItem("role", role);
             });
-
-            // Redirect user
-            history.replace(from);
         }
+
+        // Redirect user
+        history.replace(from);
     };
 
     return (

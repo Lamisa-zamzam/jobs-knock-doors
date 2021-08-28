@@ -52,20 +52,29 @@ const Login = () => {
                         password,
                     },
                 }),
-            }).then(async (data) => {
-                // Convert data from JSON
-                const jobSeeker = await data.json();
-                const { id, email, name } = jobSeeker.data.jobSeeker;
+            })
+                .then(async (data) => {
+                    // Convert data from JSON
+                    const jobSeeker = await data.json();
+                    if (jobSeeker.data.jobSeeker) {
+                        const { id, email, name } = jobSeeker.data.jobSeeker;
 
-                // Set variables in the sessionStorage
-                sessionStorage.setItem("id", id);
-                sessionStorage.setItem("email", email);
-                sessionStorage.setItem("name", name);
-                sessionStorage.setItem("role", role);
+                        // Set variables in the sessionStorage
+                        sessionStorage.setItem("id", id);
+                        sessionStorage.setItem("email", email);
+                        sessionStorage.setItem("name", name);
+                        sessionStorage.setItem("role", role);
 
-                // Redirect user
-                history.replace(from);
-            });
+                        // Redirect user
+                        history.replace(from);
+                    } else {
+                        alert("Please register");
+                        history.push("/register");
+                    }
+                })
+                .catch((err) => {
+                    console.log(err);
+                });
         } else if (role === "employer") {
             fetch("https://aqueous-meadow-34034.herokuapp.com/graphql", {
                 method: "POST",
@@ -91,16 +100,21 @@ const Login = () => {
             }).then(async (data) => {
                 // Convert data from JSON
                 const employer = await data.json();
-                const { id, email, name } = employer.data.employer;
+                if (employer.data.employer) {
+                    const { id, email, name } = employer.data.employer;
 
-                // Set variables in the sessionStorage
-                sessionStorage.setItem("id", id);
-                sessionStorage.setItem("email", email);
-                sessionStorage.setItem("name", name);
-                sessionStorage.setItem("role", role);
+                    // Set variables in the sessionStorage
+                    sessionStorage.setItem("id", id);
+                    sessionStorage.setItem("email", email);
+                    sessionStorage.setItem("name", name);
+                    sessionStorage.setItem("role", role);
 
-                // Redirect user
-                history.replace(from);
+                    // Redirect user
+                    history.replace(from);
+                } else {
+                    alert("Please register");
+                    history.push("/register");
+                }
             });
         }
     };

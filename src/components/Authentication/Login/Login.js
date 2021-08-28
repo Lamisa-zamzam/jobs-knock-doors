@@ -31,7 +31,7 @@ const Login = () => {
         const { email, password, role } = data;
         // Send request to server for logging in depending on the role
         if (role === "jobSeeker") {
-            fetch("http://localhost:5000/graphql", {
+            fetch("https://aqueous-meadow-34034.herokuapp.com/graphql", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({
@@ -67,7 +67,7 @@ const Login = () => {
                 history.replace(from);
             });
         } else if (role === "employer") {
-            fetch("http://localhost:5000/graphql", {
+            fetch("https://aqueous-meadow-34034.herokuapp.com/graphql", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({

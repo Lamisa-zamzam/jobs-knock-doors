@@ -6,7 +6,7 @@ import { Container, Row } from "react-bootstrap";
 import "./SearchJobSeekers.css";
 // Components
 import Search from "../../Shared/Search/Search";
-import JobSeeker from "../SearchEmployees/JobSeeker/JobSeeker";
+import JobSeeker from "./JobSeeker/JobSeeker";
 
 const SearchJobSeekers = () => {
     // Initial States

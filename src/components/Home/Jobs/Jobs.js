@@ -18,7 +18,7 @@ const Jobs = ({ data }) => {
         <Container>
             <h1 className="mt-5 mb-5 text-secondary">Your Jobs</h1>
             <Row xs={1} md={2} className="g-4">
-                {!data.loading ? (
+                {!data.loading && jobs[0] ? (
                     jobs
                         .slice(0, 6)
                         .map((job) => <Job key={job.id} job={job} />)

@@ -1,5 +1,3 @@
-// React
-import { useState } from "react";
 // React Bootstrap
 import { Button, Col, Container, Form, Row } from "react-bootstrap";
 // React Hook form
@@ -10,9 +8,6 @@ import { Link, useHistory, useLocation } from "react-router-dom";
 import "../auth.css";
 
 const Login = () => {
-    // Error State
-    const [err, setErr] = useState("");
-
     // Routing vars
     let history = useHistory();
     let location = useLocation();
@@ -135,7 +130,6 @@ const Login = () => {
                             <h4 className="underlineHeading mb-2 mt-4">
                                 Sign In
                             </h4>
-                            {err && <span className="error">{err}</span>}
                             <Form
                                 onSubmit={handleSubmit(onSubmit)}
                                 className="login-form"

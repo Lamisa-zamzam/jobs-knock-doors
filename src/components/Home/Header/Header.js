@@ -8,7 +8,10 @@ const Header = () => {
         <Container fluid>
             <Row>
                 <Col>
-                    <div className="welcomeDiv imageDiv">
+                    <div
+                        className="welcomeDiv imageDiv"
+                        data-testid="headerDiv"
+                    >
                         <h6>Welcome to the world</h6>
                         <h1 className="heading">WHERE JOBS FIND YOU</h1>
                         <p>

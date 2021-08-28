@@ -15,7 +15,7 @@ import ApolloClient from "apollo-boost";
 
 // Apollo client setup
 const client = new ApolloClient({
-    uri: "https://aqueous-meadow-34034.herokuapp.com/graphql",
+    uri: "http://localhost:5000/graphql",
 });
 
 ReactDOM.render(

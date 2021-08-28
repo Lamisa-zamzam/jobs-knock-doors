@@ -1,8 +1,8 @@
 import { render } from "@testing-library/react";
 import Header from "./Header";
 
-describe("renders login page", () => {
-    it("renders the whole login view", () => {
+describe("renders the header", () => {
+    it("renders the header", () => {
         const { getByTestId } = render(<Header />);
 
         expect(getByTestId("headerDiv")).toBeTruthy();

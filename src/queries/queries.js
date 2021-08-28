@@ -18,56 +18,6 @@ const getJobsQuery = gql`
     }
 `;
 
-// Get a job detail
-const getJobDetailsQuery = gql`
-    query ($id: ID!) {
-        job(id: $id) {
-            title
-            company
-            location
-            remote
-            jobType
-            jobDescription
-            experience
-            seniorityLevel
-            salary
-            employer {
-                name
-                email
-            }
-            aboutCompany
-            responsibilities
-            requirements
-            facilities
-        }
-    }
-`;
-
-// Get a Job Seeker by Id
-const getJobSeekerByIdQuery = gql`
-    query ($id: String!) {
-        jobSeekerById(id: $id) {
-            id
-            name
-            title
-            email
-            phone
-            image
-            location
-            summary
-            experience {
-                title
-                company
-                location
-                jobType
-                date
-                description
-            }
-            skills
-        }
-    }
-`;
-
 // Mutations
 
 // Add a job
@@ -183,8 +133,6 @@ export {
     getJobsQuery,
     addJobMutation,
     addEmployerMutation,
-    getJobDetailsQuery,
     addJobSeekerMutation,
-    getJobSeekerByIdQuery,
     updateJobSeekerMutation,
 };

@@ -1,5 +1,5 @@
 // React
-import { useState } from "react";
+import { useEffect, useState } from "react";
 // React Bootstrap
 import { Container } from "react-bootstrap";
 // React Router
@@ -11,38 +11,72 @@ import "./Profile.css";
 import ProfileNormal from "./Profiles/ProfileNormal";
 import ProfileEditing from "./Profiles/ProfileEditing";
 
-// GraphQL for sending and fetching data from GraphQL server
-import { graphql } from "react-apollo";
-// GraphQL query
-import { getJobSeekerByIdQuery } from "../../../queries/queries";
-
-const Profile = ({ data }) => {
-    // Get id from parameters
-    const { id } = useParams();
-    sessionStorage.setItem("employerId", id);
+const Profile = () => {
     // Initial States
+    const [data, setData] = useState([]);
     // If the user is editing the profile
     const [editing, setEditing] = useState(false);
 
-    // Get the Job Seeker logged in from data
-    const { jobSeekerById } = data;
+    // Get id from parameters
+    const { id } = useParams();
+
+    // Get job details depending on its id in the param
+    useEffect(() => {
+        fetch("http://localhost:5000/graphql", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+                query: `query ($id: String!) {
+                    jobSeekerById(id: $id) {
+                        id
+                        name
+                        title
+                        email
+                        phone
+                        image
+                        location
+                        summary
+                        experience {
+                            title
+                            company
+                            location
+                            jobType
+                            date
+                            description
+                        }
+                        skills
+                    }
+                }
+                `,
+                variables: {
+                    id,
+                },
+            }),
+        }).then(async (data) => {
+            // Convert data from JSON
+            const jobSeeker = await data.json();
+            console.log(jobSeeker);
+            // Set State
+            setData(jobSeeker.data.jobSeekerById);
+        });
+    }, [id]);
 
     return (
         <Container>
             {/* If data is not loading show components */}
-            {!data.loading ? (
+            {data ? (
                 // Show different components based on editing state
                 !editing ? (
                     <ProfileNormal
-                        jobSeekerById={jobSeekerById}
+                        jobSeekerById={data}
                         editing={editing}
                         setEditing={setEditing}
                     />
                 ) : sessionStorage.getItem("role") === "jobSeeker" ? (
-                    <ProfileEditing jobSeekerById={jobSeekerById} />
+                    <ProfileEditing jobSeekerById={data} />
                 ) : (
                     <ProfileNormal
-                        jobSeekerById={jobSeekerById}
+                        jobSeekerById={data}
                         editing={editing}
                         setEditing={setEditing}
                     />
@@ -54,12 +88,4 @@ const Profile = ({ data }) => {
     );
 };
 
-export default graphql(getJobSeekerByIdQuery, {
-    options: () => {
-        return {
-            variables: {
-                id: sessionStorage.getItem("employerId"),
-            },
-        };
-    },
-})(Profile);
+export default Profile;

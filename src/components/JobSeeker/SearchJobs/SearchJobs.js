@@ -15,7 +15,7 @@ const SearchJobs = () => {
 
     // Get jobs depending on search title and location
     useEffect(() => {
-        fetch("https://aqueous-meadow-34034.herokuapp.com/graphql", {
+        fetch("http://localhost:5000/graphql", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({
@@ -38,6 +38,7 @@ const SearchJobs = () => {
                 },
             }),
         }).then(async (data) => {
+            console.log(data);
             // Convert data from JSON
             const jobData = await data.json();
             // Set State

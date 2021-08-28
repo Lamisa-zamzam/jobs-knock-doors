@@ -22,7 +22,7 @@ const MyNavbar = () => {
                     <Nav.Link as={Link} to="/search-jobs" className="navLink">
                         Jobs
                     </Nav.Link>
-                    {id && (
+                    {id && sessionStorage.getItem("role") === "jobSeeker" && (
                         <Nav.Link
                             as={Link}
                             to={`/profile/${id}`}
@@ -31,19 +31,35 @@ const MyNavbar = () => {
                             Profile
                         </Nav.Link>
                     )}
-                    <Nav.Link as={Link} to="/login" className="navLink">
-                        Login
-                    </Nav.Link>
-                    <Nav.Link as={Link} to="/register" className="navLink">
-                        Register
-                    </Nav.Link>
-                    <Nav.Link
-                        as={Link}
-                        to="/search-jobSeekers"
-                        className="navLink"
-                    >
-                        Job Seekers
-                    </Nav.Link>
+                    {!id && (
+                        <>
+                            {" "}
+                            <Nav.Link as={Link} to="/login" className="navLink">
+                                Login
+                            </Nav.Link>
+                            <Nav.Link
+                                as={Link}
+                                to="/register"
+                                className="navLink"
+                            >
+                                Register
+                            </Nav.Link>
+                        </>
+                    )}
+                    {sessionStorage.getItem("role") === "employer" && (
+                        <Nav.Link
+                            as={Link}
+                            to="/search-jobSeekers"
+                            className="navLink"
+                        >
+                            Job Seekers
+                        </Nav.Link>
+                    )}
+                    {sessionStorage.getItem("role") === "employer" && (
+                        <Nav.Link as={Link} to="/post-a-job" className="navLink">
+                            Post A Job
+                        </Nav.Link>
+                    )}
                 </Nav>
             </Navbar.Collapse>
         </Navbar>

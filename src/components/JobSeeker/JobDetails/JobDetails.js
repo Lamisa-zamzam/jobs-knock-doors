@@ -1,3 +1,5 @@
+// React
+import { useEffect, useState } from "react";
 // React Bootstrap
 import { Col, Container, Row, Button } from "react-bootstrap";
 // React Router DOM
@@ -5,39 +7,66 @@ import { useParams } from "react-router-dom";
 // StyleSheet
 import "./JobDetails.css";
 
-// GraphQL for sending and fetching data from GraphQL server
-import { graphql } from "react-apollo";
-// GraphQL Query
-import { getJobDetailsQuery } from "../../../queries/queries";
-import { useEffect } from "react";
+const JobDetails = () => {
+    // Initial State
+    const [data, setData] = useState([]);
 
-const JobDetails = ({ data }) => {
     // Get the width of the window
     const windowWidth = window.innerWidth;
 
     // Get id from the URL parameter
     const { id } = useParams();
 
-    // Get the job from data sent from server
-    const { job } = data;
-
+    // Get job details depending on its id in the param
     useEffect(() => {
-        (async () => {
-            // Set the job Id in the sessionStorage
-            await sessionStorage.setItem("jobId", id);
-        })();
+        fetch("http://localhost:5000/graphql", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+                query: `query ($id: ID!) {
+                    job(id: $id) {
+                        title
+                        company
+                        location
+                        remote
+                        jobType
+                        jobDescription
+                        experience
+                        seniorityLevel
+                        salary
+                        employer {
+                            name
+                            email
+                        }
+                        aboutCompany
+                        responsibilities
+                        requirements
+                        facilities
+                    }
+                }
+                `,
+                variables: {
+                    id,
+                },
+            }),
+        }).then(async (data) => {
+            // Convert data from JSON
+            const jobDetails = await data.json();
+            // Set State
+            setData(jobDetails.data.job);
+        });
     }, [id]);
 
     return (
         <Container>
-            {!data.loading ? (
+            {data ? (
                 <>
                     <div className="text-center text-success">
                         <h1>
-                            {job?.title} - {job?.remoteOrNot}
+                            {data?.title} - {data?.remoteOrNot}
                         </h1>
                         <small>
-                            {job?.company}, {job?.location}
+                            {data?.company}, {data?.location}
                         </small>
                     </div>
                     <div
@@ -61,21 +90,21 @@ const JobDetails = ({ data }) => {
                                     <small className="text-secondary">
                                         Title
                                     </small>
-                                    <h6>{job?.title}</h6>
+                                    <h6>{data?.title}</h6>
                                     <hr />
                                 </div>
                                 <div>
                                     <small className="text-secondary">
                                         Company
                                     </small>
-                                    <h6>{job?.company}</h6>
+                                    <h6>{data?.company}</h6>
                                     <hr />
                                 </div>
                                 <div>
                                     <small className="text-secondary">
                                         Location
                                     </small>
-                                    <h6>{job?.location}</h6>
+                                    <h6>{data?.location}</h6>
                                     <hr />
                                 </div>
                                 <div>
@@ -83,7 +112,7 @@ const JobDetails = ({ data }) => {
                                         Remote or not
                                     </small>
                                     <h6>
-                                        {job?.remoteOrNot
+                                        {data?.remoteOrNot
                                             ? "Remote"
                                             : "In-office"}
                                     </h6>
@@ -93,19 +122,19 @@ const JobDetails = ({ data }) => {
                                     <small className="text-secondary">
                                         Job Type
                                     </small>
-                                    <h6>{job?.jobType}</h6>
+                                    <h6>{data?.jobType}</h6>
                                     <hr />
                                 </div>
                                 <div>
                                     <small className="text-secondary">
                                         Experience
                                     </small>
-                                    <h6>{job?.experience}</h6>
+                                    <h6>{data?.experience}</h6>
                                     <hr />
                                 </div>
                                 <div>
                                     <small className="text-secondary">
-                                        {job?.seniorityLevel}
+                                        {data?.seniorityLevel}
                                     </small>
                                     <h6>Entry</h6>
                                     <hr />
@@ -114,8 +143,8 @@ const JobDetails = ({ data }) => {
                                     <small className="text-secondary">
                                         Salary
                                     </small>
-                                    {job?.salary ? (
-                                        <h6>{job.salary}</h6>
+                                    {data?.salary ? (
+                                        <h6>{data.salary}</h6>
                                     ) : (
                                         <small className="text-muted d-block">
                                             salary not provided
@@ -127,10 +156,10 @@ const JobDetails = ({ data }) => {
                                     <small className="text-secondary">
                                         Employer
                                     </small>
-                                    {job?.employer ? (
+                                    {data?.employer ? (
                                         <h6>
-                                            {job.employer.name} |{" "}
-                                            {job.employer.email}
+                                            {data.employer.name} |{" "}
+                                            {data.employer.email}
                                         </h6>
                                     ) : (
                                         <small className="text-muted d-block">
@@ -150,22 +179,22 @@ const JobDetails = ({ data }) => {
                                 <small className={"fw-bolder"}>
                                     About the company
                                 </small>
-                                <p>{job?.aboutCompany}</p>
+                                <p>{data?.aboutCompany}</p>
                                 <hr />
                             </div>
                             <div className="detailInfo">
                                 <small className="fw-bolder">
-                                    Job Description
+                                    data Description
                                 </small>
-                                <p>{job?.jobDescription}</p>
+                                <p>{data?.jobDescription}</p>
                                 <hr />
                             </div>
                             <div className="detailInfo">
                                 <small className="fw-bold">
                                     Responsibilities
                                 </small>
-                                {job?.responsibilities ? (
-                                    <p>{job.responsibilities}</p>
+                                {data?.responsibilities ? (
+                                    <p>{data.responsibilities}</p>
                                 ) : (
                                     <small className="text-muted d-block">
                                         Responsibilities not provided
@@ -175,13 +204,13 @@ const JobDetails = ({ data }) => {
                             </div>
                             <div className="detailInfo">
                                 <small className="fw-bold">Requirements</small>
-                                <p>{job?.requirements}</p>
+                                <p>{data?.requirements}</p>
                                 <hr />
                             </div>
                             <div className="detailInfo">
                                 <small className="fw-bold">Facilities</small>
-                                {job?.facilities ? (
-                                    <p>{job.facilities}</p>
+                                {data?.facilities ? (
+                                    <p>{data.facilities}</p>
                                 ) : (
                                     <small className="text-muted d-block">
                                         Facilities not provided
@@ -206,12 +235,4 @@ const JobDetails = ({ data }) => {
     );
 };
 
-export default graphql(getJobDetailsQuery, {
-    options: (props) => {
-        return {
-            variables: {
-                id: props.data.job.id,
-            },
-        };
-    },
-})(JobDetails);
+export default JobDetails;

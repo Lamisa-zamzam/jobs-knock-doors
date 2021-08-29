@@ -19,7 +19,7 @@ const JobDetails = () => {
 
     // Get job details depending on its id in the param
     useEffect(() => {
-        fetch("http://localhost:5000/graphql", {
+        fetch("https://aqueous-meadow-34034.herokuapp.com/graphql", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({

@@ -3,9 +3,19 @@ import { Link } from "react-router-dom";
 import "./MyNavbar.css";
 
 import knock from "../../../images/knock.jpg";
+import { useEffect, useState } from "react";
 
 const MyNavbar = () => {
-    const id = sessionStorage.getItem("id");
+    // Initial States
+    const [id, setId] = useState(null);
+    const [role, setRole] = useState(null);
+
+    // Set Id and role
+    useEffect(() => {
+        setId(sessionStorage.getItem("id"));
+        setRole(sessionStorage.getItem("role"));
+    }, []);
+
     return (
         <Navbar variant="dark" bg="dark" expand="lg">
             <Navbar.Brand as={Link} to="/home" className="brandName">
@@ -22,7 +32,7 @@ const MyNavbar = () => {
                     <Nav.Link as={Link} to="/search-jobs" className="navLink">
                         Jobs
                     </Nav.Link>
-                    {id && sessionStorage.getItem("role") === "jobSeeker" && (
+                    {id && role === "jobSeeker" && (
                         <Nav.Link
                             as={Link}
                             to={`/profile/${id}`}
@@ -33,7 +43,6 @@ const MyNavbar = () => {
                     )}
                     {!id && (
                         <>
-                            {" "}
                             <Nav.Link as={Link} to="/login" className="navLink">
                                 Login
                             </Nav.Link>
@@ -46,7 +55,7 @@ const MyNavbar = () => {
                             </Nav.Link>
                         </>
                     )}
-                    {sessionStorage.getItem("role") === "employer" && (
+                    {role === "employer" && (
                         <Nav.Link
                             as={Link}
                             to="/search-jobSeekers"
@@ -55,8 +64,12 @@ const MyNavbar = () => {
                             Job Seekers
                         </Nav.Link>
                     )}
-                    {sessionStorage.getItem("role") === "employer" && (
-                        <Nav.Link as={Link} to="/post-a-job" className="navLink">
+                    {role === "employer" && (
+                        <Nav.Link
+                            as={Link}
+                            to="/post-a-job"
+                            className="navLink"
+                        >
                             Post A Job
                         </Nav.Link>
                     )}
